@@ -7,6 +7,10 @@
 //
 
 #include <iostream>
+#include "Tournament.hpp"
 
 int main(int argc, const char * argv[]) {
+    Tournament t;
+    t.startGame();
+    
 }
