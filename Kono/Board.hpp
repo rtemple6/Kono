@@ -13,7 +13,7 @@
 #include "BoardView.hpp"
 
 class Board {
-    BoardView * board;
+    BoardView boardView;
     int boardSize;
 public:
     Board();

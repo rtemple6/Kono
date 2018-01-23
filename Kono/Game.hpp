@@ -19,6 +19,7 @@ public:
     Game();
     void setUpBoard();
     void determineOrder();
+    void chooseColor();
 };
 
 #endif /* Game_hpp */

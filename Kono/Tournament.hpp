@@ -13,7 +13,6 @@
 using namespace std;
 
 class Tournament {
-    void newRound();
 public:
     Tournament();
     void startGame();

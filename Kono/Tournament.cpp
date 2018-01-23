@@ -11,18 +11,14 @@
 #include <iostream>
 using namespace std;
 
+Tournament::Tournament() {
+    
+}
+
 void Tournament::startGame() {
     cout << "Welcome to Kono!" << endl;
     cout << "Player 1 vs. Computer" << endl;
-    newRound();
-}
-
-void Tournament::newRound() {
     Game game;
     game.setUpBoard();
     game.determineOrder();
-}
-
-Tournament::Tournament() {
-    
 }

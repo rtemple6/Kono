@@ -12,6 +12,7 @@ using namespace std;
 
 Board::Board() {
     this->boardSize = 5;
+    this->boardView = BoardView();
 }
 
 Board::Board(int boardSize) {
@@ -24,4 +25,5 @@ void Board::setBoardSize(int boardSize) {
 
 void Board::drawBoard() {
     cout << "Drawing board with size: " << boardSize << endl;
+    this->boardView.drawBoardWithSize(boardSize);
 }

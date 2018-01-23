@@ -8,6 +8,7 @@
 
 #include "Game.hpp"
 #include <iostream>
+#include <string>
 using namespace std;
 
 Game::Game() {
@@ -32,5 +33,14 @@ void Game::determineOrder() {
         return;
     }
     
+    chooseColor();
+}
+
+void Game::chooseColor() {
+    //Determine who first player
+    string color;
+    cout << "Player 1 you choose color: B or W" << endl;
+    cin >> color;
     
+    cout << "You are color: " << color << endl;
 }

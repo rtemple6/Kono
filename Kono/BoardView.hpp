@@ -12,10 +12,11 @@
 #include <stdio.h>
 
 class BoardView {
-    
+    int boardSize = 5;
     
 public:
-    
+    BoardView();
+    void drawBoardWithSize(int boardSize);
 };
 
 #endif /* BoardView_hpp */
