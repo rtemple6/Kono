@@ -1,0 +1,206 @@
+# Kono
+Implementation of the game Kono for Spring '18 Ramapo College Operations of Programming Language course.
+Kono
+Kono is a two-player board game.
+The Objective
+The objective of this game is to move all of one's pieces across the board to occupy the points on which the opponent started.
+The Players
+Two players play this game - one player will be the human user of your program, and the other player will be your program/computer. The two players will play a "tournament", consisting of one or more rounds. Each round will consist of the two players playing till one of them moves all the pieces to the opponent's home points, or a player quits.
+The Setup
+The game uses a square board which could be 5 X 5, 7 X 7 or 9 X 9 in size. 
+A 5 X 5 board contains five vertical and five horizontal lines. Each intersection of a vertical and horizontal line is a point. On a 5 X 5 board, initially, seven black and seven white pieces are arranged at the two opposite ends (called home points) of the board as shown below:
+N  
+1  W - W - W - W - W  
+   |   |   |   |   |
+2  W - + - + - + - W
+   |   |   |   |   |
+3  + - + - + - + - +
+   |   |   |   |   |
+4  B - + - + - + - B  
+   |   |   |   |   |
+5  B - B - B - B - B  
+S
+W  1   2   3   4   5  E
+  
+Note that rows are numbered 1-5 from the top (North or N) to bottom (South or S) and columns are numbered 1-5 starting from the left (West or W) to the right (East or E). One player plays white pieces while the other player plays black. 
+Similarly, 7 X 7 board contains 9 white and 9 black pieces and 9 X 9 board contains 11 white and 11 black pieces. 
+At the start of each round, the user is asked for the size of the board.
+A Round
+The two players take alternate turns till one of them wins or quits.
+A Turn
+During her turn, a player can move one of her pieces subject to the following rules:
+The piece can only be moved diagonally by one square. The possible moves are (and must be described as) Northwest, Northeast, Southeast or Southwest.
+The piece can only be moved to a point that is not already occupied by another piece. So, it is possible to block an opponent's piece with one's own pieces.
+Once a piece has reached a home point of the opponent, the piece acquires the ability to capture opponent's pieces by landing on them. While it can still move only diagonally and by one square at a time, it can move to a point already occupied by an opponent's piece and "capture" it. The captured piece is removed from the board.
+Winning
+The round ends in one of two ways:
+A player places all his pieces in the home points of the opponent.
+One of the players quits the game.
+Score
+When a round ends, the points earned by each player are calculated as follows:
+Different home points earn different number of points as shown below:
+   3 - 1 - 5 - 1 - 3  
+   |   |   |   |   |
+   1 - + - + - + - 1
+   |   |   |   |   |
+   + - + - + - + - +
+   |   |   |   |   |
+   1 - + - + - + - 1  
+   |   |   |   |   |
+   3 - 1 - 5 - 1 - 3
+  
+7 X 7 board is weighed as follows:
+   3 - 1 - 5 - 7 - 5 - 1 - 3  
+   |   |   |   |   |   |   |
+   1 - + - + - + - + - + - 1
+   |   |   |   |   |   |   |
+9 X 9 board is weighed as follows:
+   3 - 1 - 5 - 7 - 9 - 7 - 5 - 1 - 3  
+   |   |   |   |   |   |   |   |   |
+   1 - + - + - + - + - + - + - + - 1
+   |   |   |   |   |   |   |   |   |
+So, it is more advantageous to reach some home points than others. The player gets a score that is the sum of all the home points of the opponent occupied by the player's pieces. For example, the points earned by the player of black pieces below = 3 + 5 + 1 + 1 = 10 points.
+   B - + - B - B - +  
+   |   |   |   |   |
+   + - + - + - + - B
+   |   |   |   |   |
+The player earns 5 extra points for each opponent's piece captured.
+The player who quits is penalized 5 points.
+The player with the larger score wins the round. That player is awarded points equal to the difference between the scores of the two players. The scores earned by the two players and the points awarded to the winner must be declared at the end of each round.
+First Player
+On the first round of the tournament, the two players throw a pair of dice. The player with the greater sum of dice selects the color (black or white) and plays first.
+If the sum of both players is the same, dice are thrown repeatedly till a first player can be determined.
+On the second and subsequent rounds of the tournament, the winner of the previous round plays first after selecting the color.
+The Tournament
+After each round, the human player is asked whether she/he wants to play another round.
+If yes, another round is played as described above, the user is asked for the board size and the process is repeated.
+If no, the winner of the tournament is announced and the game quits. The winner of the tournament is the player who has won the most number of points, calculated as the sum of the points earned on all the rounds. If both the players earn the same number of points, the tournament is a draw.
+Computer Player's Strategy
+Your computer player must play to win. It must have a strategy for each of the following:
+Which piece to move;
+The direction in which to move the piece;
+Blocking opponent's piece;
+Capturing opponent's piece
+Implementation
+User Interface: You must provide a user-friendly interface for the game. For C++, LISP and Prolog, ASCII graphics and command-line input are sufficient.
+The board must be displayed with row and column numbers.
+All human inputs must be validated.
+Human and computer moves must be described in terms of the four directions: Northwest, northeast, southeast and southwest.
+Before each player plays, the following menu must be displayed and processed:
+Save the game
+Make a move
+Ask for help (only before human player plays)
+Quit the game
+The turn played by the computer as well as the strategy it uses must be displayed on the screen, e.g.,
+      The computer moved the piece at (2,1) southeast.
+      It wanted to block the human piece at (4, 3).
+    
+Throwing dice: In the code that handles throwing dice, build in a configurable option. If the option is set to true, the code will load the sequence of dice throws from a text file instead of randomly generating them. The text file will contain one dice throw per line such as:
+  4 3
+  2 2
+  5 4
+  2 6
+  
+The first dice are for the human player and the dice alternate for the two players thereafter. This will help you test the game and demonstrate it.
+Help Mode: When the human player is playing, the computer must provide a help mode:
+If the human player asks for a recommendation, the computer must suggest:
+Which piece to play
+The direction in which to play it (northwest, northeast...)
+Why: To advance (toward which home point); to retreat; to block (which piece); or to capture (which piece).
+The computer must use its own playing strategy to come up with this recommendation.
+Serialization: The user should be able to suspend the game before either player's turn, and resume at a later time from where the game was left off. In order to do this:
+Provide the option to serialize before each player's turn
+When the serialization option is exercised, your program should save the current state of the game into a file and quit. We will use text format for the file. 
+The text format for C++/Java will be as follows:
+Round: 3
+  
+Computer:
+   Score: 17
+   Color: Black
+
+Human:
+   Score: 14
+   Color: White
+
+Board:
+   O  W  O  O  W  
+   O  O  W  W  W
+   W  W  B  B  O
+   B  B  B  O  O  
+   O  B  O  O  B  
+
+Next Player: Human
+In the board:
+Vacant points are represented using O (character, not number).
+Piece that has acquired the ability to capture opponent's pieces will be represented doubled up, as in WW or BB.
+Note that if the game is serialized before the first player has been chosen, Color and Next Player fields will be empty in the serialization format.
+In the above snapshot, 3rd round is being played. Computer is playing black and human player is playing white. The sum of the scores from previous rounds is 17 for computer and 14 for human. Human is the next player to play.
+The text format for LISP will be as follows:
+
+(
+  ; Round:
+  3
+  
+   ; Computer Score:
+   17
+
+   ; Computer Color:
+   Black
+
+   ; Human Score:
+   14
+
+   ; Human Color:
+   White
+
+   ; Board:
+   ( ( O  W  O  O  W )
+     ( O  O  W  W  W )
+     ( W  W  B  B  O )
+     ( B  B  B  O  O )
+     ( O  B  O  O  B ) )
+
+   ; Next Player:
+   Human
+)
+Note that the comments above are for your convenience. You do not need to parse those - they will not appear in actual serialization files.
+The text format for Prolog will be as follows:
+
+[
+  % Round:
+  3,
+  
+   % Computer Score:
+   17,
+
+   % Computer Color:
+   black,
+
+   % Human Score:
+   14,
+
+   % Human Color:
+   white,
+
+   % Board:
+   [ [ o,  w,  o,  o,  w ],
+     [ o,  o,  w,  w,  w ],
+     [ w,  w,  b,  b,  o ],
+     [ b,  b,  b,  o,  o ],
+     [ o,  b,  o,  o,  b ] ],
+
+   % Next Player:
+   human
+]
+Note that the comments above are for your convenience. You do not need to parse those - they will not appear in actual serialization files.
+When your program is started, it should provide the option to resume a game from a previously saved state. If yes, it should ask for the name of the text file from which to read the current state of the game, and resume playing from that state.
+Using any part of code available in textbooks or on the web is unacceptable.
+Grading
+Please see the rubric for some of the features on which your program will be graded.
+Milestones
+The following are recommended milestones for each project:
+Week 1: A basic, complete game except the items listed for week 2
+Week 2: All the strategies for the computer player, help for human player and serialization.
+Week 3: Code refactoring, cleaning, documentation.
+Acknowledgments
+This game was adapted and extended from the description at cyningstan.com
