@@ -14,12 +14,11 @@ using namespace std;
 Board::Board() {
 }
 
-int Board::getBoardSize() {
-    return this->boardSize;
-}
-
 void Board::createBoard(int size) {
     this->boardSize = size;
+    
+    //Used to determine end piece.
+    int tmp = size -1;
     
     //This creates a 1-Dimensional Array of pointers
     //Each pointer points to an array of values
@@ -31,9 +30,36 @@ void Board::createBoard(int size) {
     //Fill the board
     for(int i = 0; i < size; i++) {
         for(int j = 0; j < size; j++) {
-            this->board[i][j] = 'O';
+            if (i == 0) {
+                //First row
+                this->board[i][j] = 'W';
+            } else if (i == 1) {
+                //Second row
+                if (j == 0) {
+                    //First piece
+                    this->board[i][j] = 'W';
+                } else if (j == tmp) {
+                    //Last piece
+                    this->board[i][j] = 'W';
+                } else {
+                    //Filler piece
+                    this->board[i][j] = 'O';
+                }
+            } else {
+                this->board[i][j] = 'R';
+            }
         }
     }
+}
+
+int Board::getBoardSize() {
+    return this->boardSize;
+}
+
+char Board::pieceAt(int row, int column) {
+    char piece = board[row][column];
+    
+    return this->board[row][column];
 }
 
 void Board::drawBoard() {

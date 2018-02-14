@@ -20,8 +20,9 @@ public:
     Board();
     
     void createBoard(int size);
-    
     int getBoardSize();
+    
+    char pieceAt(int row, int column);
     
     //Draws the current board
     void drawBoard();

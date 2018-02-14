@@ -32,14 +32,28 @@ void BoardView::setBoard(Board *b) {
 }
 
 void BoardView::draw() {
-    
     //This loops on the rows.
-    for(int i = 0; i < this->board->getBoardSize(); i++) {
-        //This loops through columns
-        for(int j = 0; j < this->board->getBoardSize(); j++) {
-            cout << "O" << "  ";
+    int size = this->board->getBoardSize();
+    int tmp = size - 1;
+    
+    cout << "N" << endl;
+    for(int i = 0; i < size; i++) {
+        cout << i << "  ";
+        for(int j = 0; j < size; j++) {
+            cout << this->board->pieceAt(i, j);
+            
+            //This prints the in-between fields minus the last one
+            (j == tmp) ? cout << "" : cout << " - ";
         }
         //New line
-        cout << endl;
+        cout << endl << endl;
     }
+    
+    //Draw out bottom bar
+    cout << "W  ";
+    for (int i = 1; i <= size; i++) {
+        cout << i;
+        (i - 1 == tmp) ? cout << "" : cout << "   ";
+    }
+    cout << "  E" << endl;
 }
