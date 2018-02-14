@@ -19,8 +19,9 @@ Game::Game() {
 
 void Game::setUpBoard() {
     int size;
-    cout << "Choose a board size for this round: 5, 7, 9" << endl;
+    cout << "Select board size (5, 7, or 9): ";
     cin >> size;
+    cout << endl;
     this->board.createBoard(size);
     this->board.drawBoard();
 }

@@ -46,7 +46,10 @@ void BoardView::draw() {
             (j == tmp) ? cout << "" : cout << " - ";
         }
         //New line
-        cout << endl << endl;
+        cout << endl;
+        
+        //Print in-between rows minus the last one
+        (i == tmp) ? cout << endl : cout << "   |   |   |   |   |" << endl;
     }
     
     //Draw out bottom bar

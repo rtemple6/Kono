@@ -45,8 +45,24 @@ void Board::createBoard(int size) {
                     //Filler piece
                     this->board[i][j] = 'O';
                 }
+            } else if (i == tmp - 1) {
+                //Second to last row
+                if (j == 0) {
+                    //First piece
+                    this->board[i][j] = 'B';
+                } else if (j == tmp) {
+                    //Last piece
+                    this->board[i][j] = 'B';
+                } else {
+                    //Filler piece
+                    this->board[i][j] = 'O';
+                }
+            } else if (i == tmp) {
+                //Last row
+                this->board[i][j] = 'B';
             } else {
-                this->board[i][j] = 'R';
+                //Filler spaces
+                this->board[i][j] = 'O';
             }
         }
     }
@@ -58,8 +74,10 @@ int Board::getBoardSize() {
 
 char Board::pieceAt(int row, int column) {
     char piece = board[row][column];
-    
-    return this->board[row][column];
+    if (piece == 'O') {
+        return '+';
+    }
+    return piece;
 }
 
 void Board::drawBoard() {
