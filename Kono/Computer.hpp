@@ -11,11 +11,13 @@
 
 #include <stdio.h>
 #include "Player.hpp"
+using namespace std;
 
 class Computer: public Player {
     
 public:
     Computer();
+    void play();
 };
 
 #endif /* Computer_hpp */

@@ -10,12 +10,15 @@
 #define Human_hpp
 
 #include <stdio.h>
+#include <iostream>
 #include "Player.hpp"
+using namespace std;
 
 class Human: public Player {
     
 public:
     Human();
+    void play();
 };
 
 #endif /* Human_hpp */

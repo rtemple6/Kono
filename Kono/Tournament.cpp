@@ -23,7 +23,7 @@ void Tournament::startGame() {
     game.rollDice(user, computer);
     game.setUpBoard();
     
-    (computer->getIsTurn()) ? computerMove(): provideMenu();
+    (computer->getIsTurn()) ? computer->play(): provideMenu();
 }
 
 void Tournament::provideMenu() {
@@ -42,6 +42,7 @@ void Tournament::provideMenu() {
             break;
         case 2:
             cout << "Making move..." << endl;
+            computer->play();
             break;
         case 3:
             cout << "Suggesting move..." << endl;

@@ -11,3 +11,7 @@
 Computer:: Computer() {
     
 }
+
+void Computer::play() {
+    cout << "Computer Play" << endl;
+}

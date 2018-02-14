@@ -11,7 +11,7 @@
 
 #include <stdio.h>
 #include <string>
-
+#include <iostream>
 
 class Player {
     bool isTurn = false;
@@ -23,6 +23,8 @@ public:
     
     void setColor(char color);
     char getColor();
+    
+    virtual void play();
 };
 
 #endif /* Player_hpp */

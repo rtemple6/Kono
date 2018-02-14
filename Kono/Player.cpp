@@ -27,3 +27,7 @@ void Player::setColor(char color) {
 char Player::getColor() {
     return this->color;
 }
+
+void Player::play() {
+    
+}

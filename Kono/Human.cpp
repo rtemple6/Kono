@@ -8,6 +8,11 @@
 
 #include "Human.hpp"
 
+
 Human:: Human() {
     
+}
+
+void Human::play() {
+    cout << "Computer Play" << endl;
 }
