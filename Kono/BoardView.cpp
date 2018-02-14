@@ -10,19 +10,6 @@
 #include <iostream>
 using namespace std;
 
-//N
-//1  W - W - W - W - W
-//   |   |   |   |   |
-//2  W - + - + - + - W
-//   |   |   |   |   |
-//3  + - + - + - + - +
-//   |   |   |   |   |
-//4  B - + - + - + - B
-//   |   |   |   |   |
-//5  B - B - B - B - B
-//S
-//W  1   2   3   4   5  E
-
 BoardView::BoardView() {
     
 }
@@ -49,7 +36,7 @@ void BoardView::draw() {
         cout << endl;
         
         //Print in-between rows minus the last one
-        (i == tmp) ? cout << endl : cout << "   |   |   |   |   |" << endl;
+        (i == tmp) ? cout << "S" << endl : cout << "   |   |   |   |   |" << endl;
     }
     
     //Draw out bottom bar
@@ -58,5 +45,5 @@ void BoardView::draw() {
         cout << i;
         (i - 1 == tmp) ? cout << "" : cout << "   ";
     }
-    cout << "  E" << endl;
+    cout << "  E" << endl << endl;
 }
