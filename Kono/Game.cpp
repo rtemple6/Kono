@@ -10,6 +10,7 @@
 #include <iostream>
 #include <string>
 #include <limits>
+#include <ctype.h>
 
 using namespace std;
 
@@ -44,19 +45,34 @@ void Game::rollDice(Human *user, Computer *computer) {
     //Determine highest score.
     (player1Score > player2Score) ? user->setTurn(true) : computer->setTurn(true);
     
-    //Print who goes first
-    (user->getIsTurn()) ? cout << "You" : cout << "Computer";
-    cout << " will go first." << endl << endl;
-    
+    (user->getIsTurn()) ? cout << "You will go first!" << endl << endl : cout << "Computer will go first." << endl << endl;
+    chooseColor(user, computer);
 }
 
-void Game::chooseColor() {
-    //Determine who first player
-    string color;
-    cout << "Player 1 you choose color: B or W" << endl;
-    cin >> color;
+void Game::chooseColor(Human *user, Computer *computer) {
+    //Print who goes first
+    if (user->getIsTurn()) {
+        cout << "Choose your color (B or W): ";
+        char color, upperColor;
+        cin >> color;
+        upperColor = toupper(color);
+        if (upperColor != 'B') {
+            if (upperColor != 'W') {
+                cout << "Invalid Input: " << color << endl;
+                chooseColor(user, computer);
+                return;
+            }
+        }
+        user->setColor(upperColor);
+        (upperColor == 'B') ? computer->setColor('W') : computer->setColor('B');
+    } else {
+        computer->setColor('W');
+        user->setColor('B');
+    }
     
-    cout << "You are color: " << color << endl;
+    cout << "You are " << user->getColor() << "." << endl;
+    cout << "Computer is " << computer->getColor() << "." << endl << endl;
+    
 }
 
 void Game::assignRandomColor() {

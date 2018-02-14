@@ -15,10 +15,14 @@
 
 class Player {
     bool isTurn = false;
+    char color;
 public:
     Player();
     void setTurn(bool turn);
     bool getIsTurn();
+    
+    void setColor(char color);
+    char getColor();
 };
 
 #endif /* Player_hpp */

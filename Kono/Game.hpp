@@ -21,7 +21,7 @@ public:
     Game();
     void setUpBoard();
     void rollDice(Human *user, Computer *computer);
-    void chooseColor();
+    void chooseColor(Human *user, Computer *computer);
     void assignRandomColor();
 };
 
