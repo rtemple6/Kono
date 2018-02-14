@@ -9,6 +9,8 @@
 #include "Game.hpp"
 #include <iostream>
 #include <string>
+#include <limits>
+
 using namespace std;
 
 Game::Game() {
@@ -17,23 +19,31 @@ Game::Game() {
 
 void Game::setUpBoard() {
     int size;
-    cout << "Enter a size: 5, 7, 9" << endl;
+    cout << "Choose a board size for this round: 5, 7, 9" << endl;
     cin >> size;
-    this->board.setBoardSize(size);
+    this->board.createBoard(size);
     this->board.drawBoard();
 }
 
 void Game::determineOrder() {
-    int player1Score = 0;
-    int player2Score = 1;
+    int player1Score = rand() % 10 + 2;
+    int player2Score = rand() % 10 + 2;
+    
+    cout << "* Rolling dice to see who goes first *" << endl;
+    cout << "Your Roll: " << player1Score << endl;
+    cout << "Computers: " << player2Score << endl;
     
     //If they are same value, recursively call determine order.
     if (player1Score == player2Score) {
+        cout << "You tied." << endl;
         determineOrder();
         return;
     }
     
-    chooseColor();
+    //Determine highest score.
+    int player = (player1Score > player2Score) ? 1 : 2;
+    string user = player == 1 ? "You" : "Computer";
+    cout << user << " will go first." << endl << endl;
 }
 
 void Game::chooseColor() {
@@ -43,4 +53,9 @@ void Game::chooseColor() {
     cin >> color;
     
     cout << "You are color: " << color << endl;
+}
+
+void Game::assignRandomColor() {
+    int color = rand() % 2;
+    (color == 0) ? cout << "You are B." << endl : cout << "You are W" << endl;
 }

@@ -10,26 +10,21 @@
 #define Board_hpp
 
 #include <stdio.h>
-#include "BoardView.hpp"
+
 
 class Board {
-    BoardView boardView;
     int boardSize;
+    //2 Dimensional array to hold board
+    char ** board;
 public:
     Board();
-    Board(int boardSize);
-
-    void setBoardSize(int boardSize);
     
-    //Getter and setters
-    void setBoard(BoardView board);
-    BoardView getBoardView();
+    void createBoard(int size);
+    
+    int getBoardSize();
     
     //Draws the current board
     void drawBoard();
-    
-    //Moves
-    bool isValidMove();
 };
 
 #endif /* Board_hpp */

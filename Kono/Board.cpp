@@ -7,23 +7,37 @@
 //
 
 #include "Board.hpp"
+#include "BoardView.hpp"
 #include <iostream>
 using namespace std;
 
 Board::Board() {
-    this->boardSize = 5;
-    this->boardView = BoardView();
 }
 
-Board::Board(int boardSize) {
-    this->boardSize = boardSize;
+int Board::getBoardSize() {
+    return this->boardSize;
 }
 
-void Board::setBoardSize(int boardSize) {
-    this->boardSize = boardSize;
+void Board::createBoard(int size) {
+    this->boardSize = size;
+    
+    //This creates a 1-Dimensional Array of pointers
+    //Each pointer points to an array of values
+    this->board = new char *[size];
+    for(int i = 0; i < size; i++) {
+        this->board[i] = new char[size];
+    }
+    
+    //Fill the board
+    for(int i = 0; i < size; i++) {
+        for(int j = 0; j < size; j++) {
+            this->board[i][j] = 'O';
+        }
+    }
 }
 
 void Board::drawBoard() {
-    cout << "Drawing board with size: " << boardSize << endl;
-    this->boardView.drawBoardWithSize(boardSize);
+    BoardView view;
+    view.setBoard(this);
+    view.draw();
 }

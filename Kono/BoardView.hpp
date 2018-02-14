@@ -9,14 +9,15 @@
 #ifndef BoardView_hpp
 #define BoardView_hpp
 
+#include "Board.hpp"
 #include <stdio.h>
 
 class BoardView {
-    int boardSize = 5;
-    
+    Board *board;
 public:
     BoardView();
-    void drawBoardWithSize(int boardSize);
+    void setBoard(Board *b);
+    void draw();
 };
 
 #endif /* BoardView_hpp */

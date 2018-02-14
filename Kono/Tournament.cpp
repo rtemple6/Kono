@@ -16,9 +16,8 @@ Tournament::Tournament() {
 }
 
 void Tournament::startGame() {
-    cout << "Welcome to Kono!" << endl;
-    cout << "Player 1 vs. Computer" << endl;
+    cout << "Welcome to Kono!" << endl << endl;
     Game game;
-    game.setUpBoard();
     game.determineOrder();
+    game.setUpBoard();
 }

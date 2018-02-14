@@ -20,6 +20,7 @@ public:
     void setUpBoard();
     void determineOrder();
     void chooseColor();
+    void assignRandomColor();
 };
 
 #endif /* Game_hpp */

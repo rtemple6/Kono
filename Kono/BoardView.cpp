@@ -10,15 +10,36 @@
 #include <iostream>
 using namespace std;
 
+//N
+//1  W - W - W - W - W
+//   |   |   |   |   |
+//2  W - + - + - + - W
+//   |   |   |   |   |
+//3  + - + - + - + - +
+//   |   |   |   |   |
+//4  B - + - + - + - B
+//   |   |   |   |   |
+//5  B - B - B - B - B
+//S
+//W  1   2   3   4   5  E
+
 BoardView::BoardView() {
     
 }
 
-void BoardView::drawBoardWithSize(int boardSize) {
-    this->boardSize = boardSize;
-    cout << "B B B B B" << endl;
-    cout << "B O O O B" << endl;
-    cout << "O O O O O" << endl;
-    cout << "W O O O W" << endl;
-    cout << "W W W W W" << endl;
+void BoardView::setBoard(Board *b) {
+    this->board = b;
+}
+
+void BoardView::draw() {
+    
+    //This loops on the rows.
+    for(int i = 0; i < this->board->getBoardSize(); i++) {
+        //This loops through columns
+        for(int j = 0; j < this->board->getBoardSize(); j++) {
+            cout << "O" << "  ";
+        }
+        //New line
+        cout << endl;
+    }
 }
