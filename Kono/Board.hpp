@@ -10,17 +10,22 @@
 #define Board_hpp
 
 #include <stdio.h>
-
+#include "Human.hpp"
+#include "Computer.hpp"
 
 class Board {
     int boardSize;
     //2 Dimensional array to hold board
     char ** board;
+    Human *user;
+    Computer *computer;
 public:
     Board();
     
     void createBoard(int size);
     int getBoardSize();
+    
+    void set(Human *user, Computer *computer);
     
     char pieceAt(int row, int column);
     

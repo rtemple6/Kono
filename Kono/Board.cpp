@@ -32,15 +32,15 @@ void Board::createBoard(int size) {
         for(int j = 0; j < size; j++) {
             if (i == 0) {
                 //First row
-                this->board[i][j] = 'W';
+                this->board[i][j] = this->computer->getColor();
             } else if (i == 1) {
                 //Second row
                 if (j == 0) {
                     //First piece
-                    this->board[i][j] = 'W';
+                    this->board[i][j] = this->computer->getColor();
                 } else if (j == tmp) {
                     //Last piece
-                    this->board[i][j] = 'W';
+                    this->board[i][j] = this->computer->getColor();
                 } else {
                     //Filler piece
                     this->board[i][j] = 'O';
@@ -49,17 +49,17 @@ void Board::createBoard(int size) {
                 //Second to last row
                 if (j == 0) {
                     //First piece
-                    this->board[i][j] = 'B';
+                    this->board[i][j] = this->user->getColor();
                 } else if (j == tmp) {
                     //Last piece
-                    this->board[i][j] = 'B';
+                    this->board[i][j] = this->user->getColor();
                 } else {
                     //Filler piece
                     this->board[i][j] = 'O';
                 }
             } else if (i == tmp) {
                 //Last row
-                this->board[i][j] = 'B';
+                this->board[i][j] = this->user->getColor();
             } else {
                 //Filler spaces
                 this->board[i][j] = 'O';
@@ -84,4 +84,9 @@ void Board::drawBoard() {
     BoardView view;
     view.setBoard(this);
     view.draw();
+}
+
+void Board::set(Human *user, Computer *computer) {
+    this->user = user;
+    this->computer = computer;
 }

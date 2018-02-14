@@ -18,6 +18,7 @@ public:
     BoardView();
     void setBoard(Board *b);
     void draw();
+    
 };
 
 #endif /* BoardView_hpp */

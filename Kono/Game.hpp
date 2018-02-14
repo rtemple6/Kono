@@ -19,10 +19,11 @@ class Game {
     
 public:
     Game();
-    void setUpBoard();
+    void setUpBoard(Human *user, Computer *computer);
     void rollDice(Human *user, Computer *computer);
     void chooseColor(Human *user, Computer *computer);
     void assignRandomColor();
+    void move();
 };
 
 #endif /* Game_hpp */

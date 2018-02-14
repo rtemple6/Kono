@@ -14,5 +14,5 @@ Human:: Human() {
 }
 
 void Human::play() {
-    cout << "Computer Play" << endl;
+    cout << "Human Play" << endl;
 }

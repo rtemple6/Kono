@@ -47,3 +47,4 @@ void BoardView::draw() {
     }
     cout << "  E" << endl << endl;
 }
+

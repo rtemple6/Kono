@@ -18,11 +18,13 @@ Game::Game() {
     this->board = Board();
 }
 
-void Game::setUpBoard() {
+void Game::setUpBoard(Human *user, Computer* computer) {
+    
     int size;
     cout << "Select board size (5, 7, or 9): ";
     cin >> size;
     cout << endl;
+    this->board.set(user, computer);
     this->board.createBoard(size);
     this->board.drawBoard();
 }
