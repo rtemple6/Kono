@@ -10,5 +10,15 @@
 #define Player_hpp
 
 #include <stdio.h>
+#include <string>
+
+
+class Player {
+    bool isTurn = false;
+public:
+    Player();
+    void setTurn(bool turn);
+    bool getIsTurn();
+};
 
 #endif /* Player_hpp */

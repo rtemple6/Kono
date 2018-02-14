@@ -7,3 +7,7 @@
 //
 
 #include "Computer.hpp"
+
+Computer:: Computer() {
+    
+}

@@ -10,5 +10,12 @@
 #define Computer_hpp
 
 #include <stdio.h>
+#include "Player.hpp"
+
+class Computer: public Player {
+    
+public:
+    Computer();
+};
 
 #endif /* Computer_hpp */

@@ -26,9 +26,9 @@ void Game::setUpBoard() {
     this->board.drawBoard();
 }
 
-void Game::determineOrder() {
-    int player1Score = rand() % 10 + 2;
-    int player2Score = rand() % 10 + 2;
+void Game::rollDice(Human *user, Computer *computer) {
+    int player1Score = 11;//rand() % 10 + 2;
+    int player2Score = 9;//rand() % 10 + 2;
     
     cout << "* Rolling dice to see who goes first *" << endl;
     cout << "Your Roll: " << player1Score << endl;
@@ -37,14 +37,17 @@ void Game::determineOrder() {
     //If they are same value, recursively call determine order.
     if (player1Score == player2Score) {
         cout << "You tied." << endl;
-        determineOrder();
+        rollDice(user, computer);
         return;
     }
     
     //Determine highest score.
-    int player = (player1Score > player2Score) ? 1 : 2;
-    string user = player == 1 ? "You" : "Computer";
-    cout << user << " will go first." << endl << endl;
+    (player1Score > player2Score) ? user->setTurn(true) : computer->setTurn(true);
+    
+    //Print who goes first
+    (user->getIsTurn()) ? cout << "You" : cout << "Computer";
+    cout << " will go first." << endl << endl;
+    
 }
 
 void Game::chooseColor() {
@@ -60,3 +63,4 @@ void Game::assignRandomColor() {
     int color = rand() % 2;
     (color == 0) ? cout << "You are B." << endl : cout << "You are W" << endl;
 }
+

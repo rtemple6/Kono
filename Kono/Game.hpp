@@ -11,6 +11,8 @@
 
 #include <stdio.h>
 #include "Board.hpp"
+#include "Human.hpp"
+#include "Computer.hpp"
 
 class Game {
     Board board;
@@ -18,7 +20,7 @@ class Game {
 public:
     Game();
     void setUpBoard();
-    void determineOrder();
+    void rollDice(Human *user, Computer *computer);
     void chooseColor();
     void assignRandomColor();
 };

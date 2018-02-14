@@ -10,5 +10,12 @@
 #define Human_hpp
 
 #include <stdio.h>
+#include "Player.hpp"
+
+class Human: public Player {
+    
+public:
+    Human();
+};
 
 #endif /* Human_hpp */

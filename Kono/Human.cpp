@@ -7,3 +7,7 @@
 //
 
 #include "Human.hpp"
+
+Human:: Human() {
+    
+}

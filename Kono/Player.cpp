@@ -7,3 +7,16 @@
 //
 
 #include "Player.hpp"
+
+Player:: Player() {
+    
+}
+
+void Player:: setTurn(bool turn) {
+    this->isTurn = turn;
+}
+
+bool Player:: getIsTurn() {
+    return this->isTurn;
+}
+

@@ -79,20 +79,20 @@
 			isa = PBXGroup;
 			children = (
 				5D3006842016FAF90065C761 /* main.cpp */,
-				5D3006972017A45B0065C761 /* Tournament.cpp */,
 				5D3006982017A45B0065C761 /* Tournament.hpp */,
-				5D30069A2017A4740065C761 /* Game.cpp */,
+				5D3006972017A45B0065C761 /* Tournament.cpp */,
 				5D30069B2017A4740065C761 /* Game.hpp */,
-				5D30068B201701370065C761 /* Board.cpp */,
+				5D30069A2017A4740065C761 /* Game.cpp */,
 				5D30068C201701370065C761 /* Board.hpp */,
-				5D30068E201701420065C761 /* Player.cpp */,
+				5D30068B201701370065C761 /* Board.cpp */,
 				5D30068F201701420065C761 /* Player.hpp */,
-				5D3006912017014D0065C761 /* Computer.cpp */,
+				5D30068E201701420065C761 /* Player.cpp */,
 				5D3006922017014D0065C761 /* Computer.hpp */,
-				5D300694201701530065C761 /* Human.cpp */,
+				5D3006912017014D0065C761 /* Computer.cpp */,
 				5D300695201701530065C761 /* Human.hpp */,
-				5D30069D2017A48A0065C761 /* BoardView.cpp */,
+				5D300694201701530065C761 /* Human.cpp */,
 				5D30069E2017A48A0065C761 /* BoardView.hpp */,
+				5D30069D2017A48A0065C761 /* BoardView.cpp */,
 			);
 			path = Kono;
 			sourceTree = "<group>";

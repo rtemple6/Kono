@@ -9,13 +9,19 @@
 #ifndef Tournament_hpp
 #define Tournament_hpp
 
+#include "Human.hpp"
+#include "Computer.hpp"
 #include <stdio.h>
 using namespace std;
 
 class Tournament {
+    Human *user;
+    Computer *computer;
 public:
     Tournament();
     void startGame();
+    void provideMenu();
+    void computerMove();
 };
 
 #endif /* Tournament_hpp */
