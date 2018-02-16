@@ -60,3 +60,7 @@ void Tournament::provideMenu() {
 void Tournament::computerMove() {
     
 }
+
+void Tournament::setRound(int round) {
+    
+}

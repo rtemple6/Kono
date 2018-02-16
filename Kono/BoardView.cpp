@@ -35,8 +35,18 @@ void BoardView::draw() {
         //New line
         cout << endl;
         
+        if (i == tmp) {
+            cout << "S" << endl;
+        }
+        
         //Print in-between rows minus the last one
-        (i == tmp) ? cout << "S" << endl : cout << "   |   |   |   |   |" << endl;
+        for(int r = 0; r < size; r++) {
+            (i == tmp) ? cout << "" : cout << "   |";
+        }
+        
+        //Formatting to keep out bottom
+        (i == tmp) ? cout : cout << endl;
+        
     }
     
     //Draw out bottom bar

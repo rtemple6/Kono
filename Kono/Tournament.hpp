@@ -17,11 +17,13 @@ using namespace std;
 class Tournament {
     Human *user;
     Computer *computer;
+    int roundNumber = 0;
 public:
     Tournament();
     void startGame();
     void provideMenu();
     void computerMove();
+    void setRound(int round);
 };
 
 #endif /* Tournament_hpp */
