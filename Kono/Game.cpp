@@ -14,22 +14,23 @@
 
 using namespace std;
 
-Game::Game() {
-    this->board = Board();
+Game::Game(Human * u, Computer * c) {
+    this->board = new Board();
+    this->user = u;
+    this->computer = c;
 }
 
-void Game::setUpBoard(Human *user, Computer* computer) {
-    
+void Game::setUpBoard() {
     int size;
     cout << "Select board size (5, 7, or 9): ";
     cin >> size;
     cout << endl;
-    this->board.set(user, computer);
-    this->board.createBoard(size);
-    this->board.drawBoard();
+    this->board->set(user, computer);
+    this->board->createBoard(size);
+    this->board->drawBoard();
 }
 
-void Game::rollDice(Human *user, Computer *computer) {
+void Game::rollDice() {
     int player1Score = 11;//rand() % 10 + 2;
     int player2Score = 9;//rand() % 10 + 2;
     
@@ -40,7 +41,7 @@ void Game::rollDice(Human *user, Computer *computer) {
     //If they are same value, recursively call determine order.
     if (player1Score == player2Score) {
         cout << "You tied." << endl;
-        rollDice(user, computer);
+        rollDice();
         return;
     }
     
@@ -48,10 +49,10 @@ void Game::rollDice(Human *user, Computer *computer) {
     (player1Score > player2Score) ? user->setTurn(true) : computer->setTurn(true);
     
     (user->getIsTurn()) ? cout << "You will go first!" << endl << endl : cout << "Computer will go first." << endl << endl;
-    chooseColor(user, computer);
+    chooseColor();
 }
 
-void Game::chooseColor(Human *user, Computer *computer) {
+void Game::chooseColor() {
     //Print who goes first
     if (user->getIsTurn()) {
         cout << "Choose your color (B or W): ";
@@ -61,7 +62,7 @@ void Game::chooseColor(Human *user, Computer *computer) {
         if (upperColor != 'B') {
             if (upperColor != 'W') {
                 cout << "Invalid Input: " << color << endl;
-                chooseColor(user, computer);
+                chooseColor();
                 return;
             }
         }
@@ -81,4 +82,27 @@ void Game::assignRandomColor() {
     int color = rand() % 2;
     (color == 0) ? cout << "You are B." << endl : cout << "You are W" << endl;
 }
+
+void Game:: move() {
+    //Check to see who turn it is
+    int row, column;
+    Direction direction;
+    if (user->getIsTurn()) {
+        //Gets a tuple with the 3 values. They can be individually accessed.
+        tie(row, column, direction) = user->play();
+        if (board->movePiece(row, column, direction)) {
+            cout << "Successfully moved piece!" << endl;
+        } else {
+            cout << "Did not move piece!" << endl;
+        }
+    } else {
+        tie(row, column, direction) = computer->play();
+        if (board->movePiece(row, column, direction)) {
+            cout << "Moved computer piece!" << endl;
+        } else {
+            cout << "Error moving computer piece: " << endl;
+        }
+    }
+}
+
 

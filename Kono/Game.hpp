@@ -15,13 +15,14 @@
 #include "Computer.hpp"
 
 class Game {
-    Board board;
-    
+    Board *board;
+    Human *user;
+    Computer *computer;
 public:
-    Game();
-    void setUpBoard(Human *user, Computer *computer);
-    void rollDice(Human *user, Computer *computer);
-    void chooseColor(Human *user, Computer *computer);
+    Game(Human * u, Computer * c);
+    void setUpBoard();
+    void rollDice();
+    void chooseColor();
     void assignRandomColor();
     void move();
 };

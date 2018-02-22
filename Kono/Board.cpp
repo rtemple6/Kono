@@ -90,3 +90,7 @@ void Board::set(Human *user, Computer *computer) {
     this->user = user;
     this->computer = computer;
 }
+
+bool Board:: movePiece(int row, int column, Direction d) {
+    return false;
+}

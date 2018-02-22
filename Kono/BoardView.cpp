@@ -6,6 +6,7 @@
 //  Copyright © 2018 Ryan Temple. All rights reserved.
 //
 
+
 #include "BoardView.hpp"
 #include <iostream>
 using namespace std;
@@ -46,7 +47,6 @@ void BoardView::draw() {
         
         //Formatting to keep out bottom
         (i == tmp) ? cout : cout << endl;
-        
     }
     
     //Draw out bottom bar

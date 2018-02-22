@@ -13,6 +13,7 @@
 #include "Human.hpp"
 #include "Computer.hpp"
 
+
 class Board {
     int boardSize;
     //2 Dimensional array to hold board
@@ -21,7 +22,6 @@ class Board {
     Computer *computer;
 public:
     Board();
-    
     void createBoard(int size);
     int getBoardSize();
     
@@ -31,6 +31,8 @@ public:
     
     //Draws the current board
     void drawBoard();
+        
+    bool movePiece(int row, int column, Direction d);
 };
 
 #endif /* Board_hpp */

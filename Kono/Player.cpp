@@ -28,6 +28,6 @@ char Player::getColor() {
     return this->color;
 }
 
-void Player::play() {
-    
+tuple<int, int, Direction> Player::play() {
+    return make_tuple(0, 0, NW);
 }

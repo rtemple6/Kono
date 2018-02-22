@@ -12,13 +12,16 @@
 #include <stdio.h>
 #include <iostream>
 #include "Player.hpp"
+#include <locale>
 using namespace std;
 
+
 class Human: public Player {
-    
+    //Helper method
+    tuple<bool, Direction> validateDirection(string direction);
 public:
     Human();
-    void play();
+    tuple<int, int, Direction> play();
 };
 
 #endif /* Human_hpp */

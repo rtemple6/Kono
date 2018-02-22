@@ -14,17 +14,17 @@ using namespace std;
 Tournament::Tournament() {
     this->user = new Human();
     this->computer = new Computer();
+    this->game = new Game(user, computer);
 }
 
 void Tournament::startGame() {
     cout << "Welcome to Kono!" << endl << endl;
-    Game game;
     
-    game.rollDice(user, computer);
-    game.setUpBoard(user, computer);
+    game->rollDice();
+    game->setUpBoard();
     
     //Computer move or show menu
-    (computer->getIsTurn()) ? computer->play(): provideMenu();
+    (computer->getIsTurn()) ? game->move(): provideMenu();
 }
 
 void Tournament::provideMenu() {
@@ -42,7 +42,7 @@ void Tournament::provideMenu() {
             cout << "Saving game..." << endl;
             break;
         case 2:
-            user->play();
+            game->move();
             break;
         case 3:
             cout << "Suggesting move..." << endl;
@@ -57,9 +57,6 @@ void Tournament::provideMenu() {
     }
 }
 
-void Tournament::computerMove() {
-    
-}
 
 void Tournament::setRound(int round) {
     

@@ -15,6 +15,7 @@
 		5D3006992017A45B0065C761 /* Tournament.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5D3006972017A45B0065C761 /* Tournament.cpp */; };
 		5D30069C2017A4740065C761 /* Game.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5D30069A2017A4740065C761 /* Game.cpp */; };
 		5D30069F2017A48A0065C761 /* BoardView.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5D30069D2017A48A0065C761 /* BoardView.cpp */; };
+		5D3C1D78203F6AF300A41522 /* Direction.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5D3C1D77203F6AF300A41522 /* Direction.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -46,6 +47,7 @@
 		5D30069B2017A4740065C761 /* Game.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Game.hpp; sourceTree = "<group>"; };
 		5D30069D2017A48A0065C761 /* BoardView.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = BoardView.cpp; sourceTree = "<group>"; };
 		5D30069E2017A48A0065C761 /* BoardView.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = BoardView.hpp; sourceTree = "<group>"; };
+		5D3C1D77203F6AF300A41522 /* Direction.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Direction.cpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -85,14 +87,15 @@
 				5D30069A2017A4740065C761 /* Game.cpp */,
 				5D30068C201701370065C761 /* Board.hpp */,
 				5D30068B201701370065C761 /* Board.cpp */,
-				5D30068F201701420065C761 /* Player.hpp */,
-				5D30068E201701420065C761 /* Player.cpp */,
-				5D3006922017014D0065C761 /* Computer.hpp */,
-				5D3006912017014D0065C761 /* Computer.cpp */,
 				5D300695201701530065C761 /* Human.hpp */,
 				5D300694201701530065C761 /* Human.cpp */,
+				5D3006922017014D0065C761 /* Computer.hpp */,
+				5D3006912017014D0065C761 /* Computer.cpp */,
+				5D30068F201701420065C761 /* Player.hpp */,
+				5D30068E201701420065C761 /* Player.cpp */,
 				5D30069E2017A48A0065C761 /* BoardView.hpp */,
 				5D30069D2017A48A0065C761 /* BoardView.cpp */,
+				5D3C1D77203F6AF300A41522 /* Direction.cpp */,
 			);
 			path = Kono;
 			sourceTree = "<group>";
@@ -162,6 +165,7 @@
 				5D300690201701420065C761 /* Player.cpp in Sources */,
 				5D300696201701530065C761 /* Human.cpp in Sources */,
 				5D30069C2017A4740065C761 /* Game.cpp in Sources */,
+				5D3C1D78203F6AF300A41522 /* Direction.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -12,17 +12,19 @@
 #include "Human.hpp"
 #include "Computer.hpp"
 #include <stdio.h>
+#include "Game.hpp"
+#include <tuple>
 using namespace std;
 
 class Tournament {
     Human *user;
     Computer *computer;
+    Game * game;
     int roundNumber = 0;
 public:
     Tournament();
     void startGame();
     void provideMenu();
-    void computerMove();
     void setRound(int round);
 };
 

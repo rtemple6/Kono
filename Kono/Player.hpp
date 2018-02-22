@@ -12,6 +12,11 @@
 #include <stdio.h>
 #include <string>
 #include <iostream>
+#include <tuple>
+#include <sstream>
+#include "Direction.cpp"
+using namespace std;
+
 
 class Player {
     bool isTurn = false;
@@ -24,7 +29,7 @@ public:
     void setColor(char color);
     char getColor();
     
-    virtual void play();
+    virtual tuple<int, int, Direction> play();    
 };
 
 #endif /* Player_hpp */

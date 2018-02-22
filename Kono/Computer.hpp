@@ -14,10 +14,9 @@
 using namespace std;
 
 class Computer: public Player {
-    
 public:
     Computer();
-    void play();
+    tuple<int, int, Direction> play();
 };
 
 #endif /* Computer_hpp */
