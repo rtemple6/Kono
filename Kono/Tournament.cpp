@@ -9,6 +9,7 @@
 #include "Tournament.hpp"
 #include "Game.hpp"
 #include <iostream>
+#include "FileReader.hpp"
 using namespace std;
 
 Tournament::Tournament() {
@@ -20,13 +21,45 @@ Tournament::Tournament() {
 void Tournament::startGame() {
     cout << "Welcome to Kono!" << endl << endl;
     
-    game->rollDice();
-    game->setUpBoard();
-    game->provideMenu();
-//    //Computer move or show menu
-//    (computer->getIsTurn()) ? game->move(): provideMenu();
+    char resume;
+    cout << "Would you like to resume a previous game? (Y / N): ";
+    cin >> resume;
+    cout << endl;
+    if (resume == 'Y') {
+        resumeGame();
+    } else {
+        
+        game->rollDice();
+        game->setUpBoard();
+        game->provideMenu();
+    }
+    
 }
 
+void Tournament::resumeGame() {
+    FileReader f;
+    f.setFileName("SavedGame.txt");
+    
+    int round = f.getRound();
+    cout << "Round: " << round << endl;
+    
+    string nextPlayer = f.getNextPlayer();
+    cout << "Next Player: " << nextPlayer << endl;
+    
+    int computerScore = f.getComputerScore();
+    cout << "Computer score: " << computerScore << endl;
+    
+    string computerColor = f.getComputerColor();
+    cout << "Computer color: " << computerColor << endl;
+    
+    int playerScore = f.getPlayerScore();
+    cout << "Player score: " << playerScore << endl;
+    
+    string playerColor = f.getPlayerColor();
+    cout << "Player color: " << playerColor << endl;
+    
+    
+}
 
 void Tournament::setRound(int round) {
     
