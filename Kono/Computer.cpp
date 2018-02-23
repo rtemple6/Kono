@@ -13,5 +13,5 @@ Computer:: Computer() {
 }
 
 tuple<int, int, Direction> Computer::play() {
-    return make_tuple(1, 1, NE);
+    return make_tuple(0, 0, SE);
 }

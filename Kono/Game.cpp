@@ -83,6 +83,43 @@ void Game::assignRandomColor() {
     (color == 0) ? cout << "You are B." << endl : cout << "You are W" << endl;
 }
 
+void Game::provideMenu() {
+    //
+    if (computer->getIsTurn()) {
+        cout << "It's the computers turn!" << endl;
+        move();
+        return;
+    }
+    
+    int choice;
+    cout << "Choose an option below" << endl;
+    cout << "1. Save Game" << endl;
+    cout << "2. Make A Move" << endl;
+    cout << "3. Suggest Move" << endl;
+    cout << "4. Quit Game" << endl << endl;
+    cout << "Your choice: ";
+    cin >> choice;
+    
+    switch (choice) {
+        case 1:
+            cout << "Saving game..." << endl;
+            break;
+        case 2:
+            move();
+            break;
+        case 3:
+            cout << "Suggesting move..." << endl;
+            break;
+        case 4:
+            cout << "Quitting game..." << endl;
+            break;
+        default:
+            cout << "Invalid choice: " << choice << endl << endl;
+            provideMenu();
+            break;
+    }
+}
+
 void Game:: move() {
     //Check to see who turn it is
     int row, column;
@@ -91,20 +128,29 @@ void Game:: move() {
         //Gets a tuple with the 3 values. They can be individually accessed.
         tie(row, column, direction) = user->play();
         if (board->movePiece(row, column, direction)) {
-            cout << "Successfully moved piece!" << endl;
+            cout << "You successfully moved piece!" << endl << endl;
             board->drawBoard();
-            
+            swapTurns();
+            move();
         } else {
             move();
         }
     } else {
         tie(row, column, direction) = computer->play();
         if (board->movePiece(row, column, direction)) {
-            cout << "Moved computer piece!" << endl;
+            cout << "Computer successfully moved piece!" << endl << endl;
+            board->drawBoard();
+            swapTurns();
+            provideMenu();
         } else {
             cout << "Error moving computer piece: " << endl;
         }
     }
+}
+
+void Game:: swapTurns() {
+    user->setTurn(!user->getIsTurn());
+    computer->setTurn(!computer->getIsTurn());
 }
 
 

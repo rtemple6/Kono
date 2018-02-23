@@ -24,7 +24,6 @@ class Tournament {
 public:
     Tournament();
     void startGame();
-    void provideMenu();
     void setRound(int round);
 };
 

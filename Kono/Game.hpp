@@ -24,7 +24,9 @@ public:
     void rollDice();
     void chooseColor();
     void assignRandomColor();
+    void provideMenu();
     void move();
+    void swapTurns();
 };
 
 #endif /* Game_hpp */
