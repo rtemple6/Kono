@@ -16,10 +16,10 @@ Human:: Human() {
 
 tuple<int, int, Direction> Human::play() {
     int row, column;
-    cout << "What piece would you like to move?" << endl;
-    cout << "Row: ";
+    cout << endl << "Move Piece - Valid Directions (NE/NW/SE/SW)" << endl;
+    cout << "      Row: ";
     cin >> row;
-    cout << "Column: ";
+    cout << "   Column: ";
     cin >> column;
     
     //Found this line of code here https://www.daniweb.com/programming/software-development/tutorials/71858/user-input-strings-and-numbers-c
@@ -29,14 +29,14 @@ tuple<int, int, Direction> Human::play() {
     bool isValid = false;
     Direction d;
     while (!isValid) {
-        cout << "Direction: (NW, NE, SW, SE): ";
+        cout << "Direction: ";
         string direction;
         getline (cin, direction);
         
         tie(isValid, d) = validateDirection(direction);
     }
-    
-    return make_tuple(row, column, d);
+    //Subtract 1 to fix array position starting at 0
+    return make_tuple(row - 1, column - 1, d);
 }
 
 

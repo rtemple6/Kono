@@ -25,10 +25,10 @@ void BoardView::draw() {
     int tmp = size - 1;
     
     cout << "N" << endl;
-    for(int i = 0; i < size; i++) {
+    for(int i = 1; i <= size; i++) {
         cout << i << "  ";
         for(int j = 0; j < size; j++) {
-            cout << this->board->pieceAt(i, j);
+            cout << this->board->pieceAt(i - 1, j);
             
             //This prints the in-between fields minus the last one
             (j == tmp) ? cout << "" : cout << " - ";
@@ -36,17 +36,17 @@ void BoardView::draw() {
         //New line
         cout << endl;
         
-        if (i == tmp) {
+        if (i - 1 == tmp) {
             cout << "S" << endl;
         }
         
         //Print in-between rows minus the last one
         for(int r = 0; r < size; r++) {
-            (i == tmp) ? cout << "" : cout << "   |";
+            (i - 1 == tmp) ? cout << "" : cout << "   |";
         }
         
         //Formatting to keep out bottom
-        (i == tmp) ? cout : cout << endl;
+        (i - 1 == tmp) ? cout : cout << endl;
     }
     
     //Draw out bottom bar

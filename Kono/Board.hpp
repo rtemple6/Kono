@@ -20,6 +20,8 @@ class Board {
     char ** board;
     Human *user;
     Computer *computer;
+    bool isValidMove(int row, int column);
+    bool isPieceAtLocation(int row, int column);
 public:
     Board();
     void createBoard(int size);

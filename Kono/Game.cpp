@@ -94,6 +94,7 @@ void Game:: move() {
             cout << "Successfully moved piece!" << endl;
         } else {
             cout << "Did not move piece!" << endl;
+            move();
         }
     } else {
         tie(row, column, direction) = computer->play();

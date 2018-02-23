@@ -33,7 +33,7 @@ void Tournament::provideMenu() {
     cout << "1. Save Game" << endl;
     cout << "2. Make A Move" << endl;
     cout << "3. Suggest Move" << endl;
-    cout << "4. Quit Game" << endl;
+    cout << "4. Quit Game" << endl << endl;
     cout << "Your choice: ";
     cin >> choice;
     
