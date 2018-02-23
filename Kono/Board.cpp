@@ -96,13 +96,26 @@ bool Board:: movePiece(int row, int column, Direction d) {
     //S goes down, so add to row
     //E goes left, so subtract from column
     //W goes right, so add from to column
-    char piece = pieceAt(row, column);
-    cout << "The user selected piece: " << piece << endl;
+    
+    //Check to see if it is their piece
+    if (user->getIsTurn()) {
+        char color = user->getColor();
+        char userPiece = pieceAt(row, column);
+        if (color != userPiece) {
+            cout << "Invalid Move: Must select your piece (" << color << ")." << endl;
+            return false;
+        }
+    }
+    
     bool retVal = false;
     switch (d) {
         case NE:
             if (isValidMove(row - 1, column + 1)) {
-                cout << "Valid move!" << endl;
+                cout << "Moving piece at row: " << row << " column: " << column;
+                cout << " to row: " << row - 1 << " column: " << column + 1 << endl;
+                board[row][column] = 'O';
+                //Set the appropriate piece
+                board[row - 1][column + 1] = (user->getIsTurn()) ? user->getColor() : computer->getColor();
                 retVal = true;
             }
             break;
@@ -132,16 +145,6 @@ bool Board:: movePiece(int row, int column, Direction d) {
 
 bool Board::isValidMove(int row, int column) {
     
-    //Check to see if it is their piece
-//    if (user->getIsTurn()) {
-//        char color = user->getColor();
-//        char userPiece = pieceAt(row, column);
-//        if (color != userPiece) {
-//            cout << "Invalid Move: Must select your piece (" << color << ")." << endl;
-//            return false;
-//        }
-//    }
-    
     //Check to see if it is out of the bounds.
     if (row >= boardSize || row < 0 || column >= boardSize || column < 0) {
         cout << endl << "Invalid Move: Must stay on the board." << endl;
@@ -150,7 +153,26 @@ bool Board::isValidMove(int row, int column) {
     
     //Check to see if there is a piece there.
     char piece = pieceAt(row, column);
-    cout << "Piece at " << row << ", " << column << " is " << piece << endl;
+    char userPiece = user->getColor();
+    if (user->getIsTurn()) {
+        
+        //Capture functionality goes here
+        char computerPiece = computer->getColor();
+        
+        if (computerPiece == piece) {
+            cout << endl << "Computer piece occupies this space." << endl;
+            return false;
+        } else if (userPiece == piece) {
+            cout << endl << "Your piece occupies this space." << endl;
+            return false;
+        } else {
+            cout << "Valid move!" << endl;
+            
+            //Move piece
+            return true;
+        }
+    }
+    
     return false;
 }
 

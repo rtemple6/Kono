@@ -35,6 +35,7 @@ tuple<int, int, Direction> Human::play() {
         
         tie(isValid, d) = validateDirection(direction);
     }
+    
     //Subtract 1 to fix array position starting at 0
     return make_tuple(row - 1, column - 1, d);
 }

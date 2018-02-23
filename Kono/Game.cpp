@@ -92,8 +92,9 @@ void Game:: move() {
         tie(row, column, direction) = user->play();
         if (board->movePiece(row, column, direction)) {
             cout << "Successfully moved piece!" << endl;
+            board->drawBoard();
+            
         } else {
-            cout << "Did not move piece!" << endl;
             move();
         }
     } else {
