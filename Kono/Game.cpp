@@ -54,6 +54,7 @@ void Game::rollDice() {
 
 void Game::chooseColor() {
     //Print who goes first
+    stringstream ss;
     if (user->getIsTurn()) {
         cout << "Choose your color (B or W): ";
         char color, upperColor;
@@ -66,16 +67,22 @@ void Game::chooseColor() {
                 return;
             }
         }
-        user->setColor(upperColor);
-        (upperColor == 'B') ? computer->setColor('W') : computer->setColor('B');
+        
+        //Was using Chars initially, switched to Strings.
+        //This converts my char to a string
+        ss << upperColor;
+        string tmpColor;
+        ss >> tmpColor;
+        
+        user->setColor(tmpColor);
+        (upperColor == 'B') ? computer->setColor("W") : computer->setColor("B");
     } else {
-        computer->setColor('W');
-        user->setColor('B');
+        computer->setColor("W");
+        user->setColor("W");
     }
     
     cout << "You are " << user->getColor() << "." << endl;
     cout << "Computer is " << computer->getColor() << "." << endl << endl;
-    
 }
 
 void Game::assignRandomColor() {

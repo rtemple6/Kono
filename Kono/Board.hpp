@@ -17,7 +17,7 @@
 class Board {
     int boardSize;
     //2 Dimensional array to hold board
-    char ** board;
+    string ** board;
     Human *user;
     Computer *computer;
     bool isValidMove(int row, int column);
@@ -30,7 +30,7 @@ public:
     
     void set(Human *user, Computer *computer);
     
-    char pieceAt(int row, int column);
+    string pieceAt(int row, int column);
     
     //Draws the current board
     void drawBoard();

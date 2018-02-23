@@ -28,7 +28,6 @@ void Tournament::startGame() {
     if (resume == 'Y') {
         resumeGame();
     } else {
-        
         game->rollDice();
         game->setUpBoard();
         game->provideMenu();

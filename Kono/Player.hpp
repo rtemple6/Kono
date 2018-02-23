@@ -20,14 +20,14 @@ using namespace std;
 
 class Player {
     bool isTurn = false;
-    char color;
+    string color;
 public:
     Player();
     void setTurn(bool turn);
     bool getIsTurn();
     
-    void setColor(char color);
-    char getColor();
+    void setColor(string color);
+    string getColor();
     
     virtual tuple<int, int, Direction> play();    
 };

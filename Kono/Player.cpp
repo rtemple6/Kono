@@ -20,11 +20,11 @@ bool Player:: getIsTurn() {
     return this->isTurn;
 }
 
-void Player::setColor(char color) {
+void Player::setColor(string color) {
     this->color = color;
 }
 
-char Player::getColor() {
+string Player::getColor() {
     return this->color;
 }
 

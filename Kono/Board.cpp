@@ -22,9 +22,9 @@ void Board::createBoard(int size) {
     
     //This creates a 1-Dimensional Array of pointers
     //Each pointer points to an array of values
-    this->board = new char *[size];
+    this->board = new string *[size];
     for(int i = 0; i < size; i++) {
-        this->board[i] = new char[size];
+        this->board[i] = new string[size];
     }
     
     //Fill the board
@@ -72,10 +72,10 @@ int Board::getBoardSize() {
     return this->boardSize;
 }
 
-char Board::pieceAt(int row, int column) {
-    char piece = board[row][column];
-    if (piece == 'O') {
-        return '+';
+string Board::pieceAt(int row, int column) {
+    string piece = board[row][column];
+    if (piece == "O") {
+        return "+";
     }
     return piece;
 }
@@ -99,15 +99,15 @@ bool Board:: movePiece(int row, int column, Direction d) {
     
     //Check to see if it is their piece
     if (user->getIsTurn()) {
-        char color = user->getColor();
-        char userPiece = pieceAt(row, column);
+        string color = user->getColor();
+        string userPiece = pieceAt(row, column);
         if (color != userPiece) {
             cout << endl << "Invalid Move: Must select your piece (" << color << ")." << endl;
             return false;
         }
     } else {
-        char color = computer->getColor();
-        char computerPiece = pieceAt(row, column);
+        string color = computer->getColor();
+        string computerPiece = pieceAt(row, column);
         if (color != computerPiece) {
             cout << endl << "Silly computer that's not your piece" << endl;
             return false;
@@ -171,9 +171,9 @@ bool Board::isValidMove(int row, int column) {
     }
     
     //Check to see if there is a piece there.
-    char piece = pieceAt(row, column);
-    char userPiece = user->getColor();
-    char computerPiece = computer->getColor();
+    string piece = pieceAt(row, column);
+    string userPiece = user->getColor();
+    string computerPiece = computer->getColor();
     if (user->getIsTurn()) {
         if (computerPiece == piece) {
             cout << endl << "Computer piece occupies this space." << endl;

@@ -13,6 +13,7 @@
 #include "Board.hpp"
 #include "Human.hpp"
 #include "Computer.hpp"
+#include <sstream>
 
 class Game {
     Board *board;

@@ -133,29 +133,6 @@ string FileReader::getPlayerColor() {
     return player;
 }
 
-//
-//gameData.close();
-//gameData.open("SavedGame.txt");
-//
-
-//
-//gameData.close();
-//gameData.open("SavedGame.txt");
-//
-//string humanIn, human;
-//for (int i = 1; !gameData.eof() ; i++)
-//{
-//    getline(gameData, humanIn);
-//
-//    if (i < 8 || i > 9)  continue;
-//
-//    human.append(humanIn);
-//}
-//cout << "Human: " << human << endl;
-//
-//gameData.close();
-//gameData.open("SavedGame.txt");
-//
 
 //
 //gameData.close();
