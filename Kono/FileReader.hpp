@@ -26,6 +26,8 @@ class FileReader {
 public:
     FileReader();
     
+    string validateFile();
+    
     void setFileName(string name);
     
     int getRound();

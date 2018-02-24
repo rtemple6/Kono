@@ -1,13 +1,13 @@
 //
-//  Game.hpp
+//  Round.hpp
 //  Kono
 //
-//  Created by Ryan Temple on 1/23/18.
+//  Created by Ryan Temple on 2/24/18.
 //  Copyright © 2018 Ryan Temple. All rights reserved.
 //
 
-#ifndef Game_hpp
-#define Game_hpp
+#ifndef Round_hpp
+#define Round_hpp
 
 #include <stdio.h>
 #include "Board.hpp"
@@ -16,13 +16,13 @@
 #include "FileWriter.hpp"
 #include <sstream>
 
-class Game {
+class Round {
     Board *board;
     Human *user;
     Computer *computer;
     int round = 1;
 public:
-    Game(Human * u, Computer * c);
+    Round(Human * u, Computer * c);
     
     void setRound(int round);
     int getRound();
@@ -42,3 +42,4 @@ public:
 };
 
 #endif /* Game_hpp */
+

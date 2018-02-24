@@ -39,6 +39,26 @@ string ** FileReader:: createBoard(int size, string data[]) {
     return board;
 }
 
+string FileReader::validateFile() {
+    bool validString = false;
+    string filename;
+    
+    cin.ignore(numeric_limits<streamsize>::max(), '\n');
+    
+    while (!validString) {
+        cout << "Enter a file name: ";
+        getline (cin, filename);
+        
+        stream.open(filename);
+        if (!stream.fail()) {
+            validString = true;
+        }
+        stream.close();
+    }
+    return filename;
+}
+
+//Will return false if can not open file
 void FileReader::setFileName(string name) {
     filename = name;
 }

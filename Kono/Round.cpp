@@ -1,12 +1,12 @@
 //
-//  Game.cpp
+//  Round.cpp
 //  Kono
 //
-//  Created by Ryan Temple on 1/23/18.
+//  Created by Ryan Temple on 2/24/18.
 //  Copyright © 2018 Ryan Temple. All rights reserved.
 //
 
-#include "Game.hpp"
+#include "Round.hpp"
 #include <iostream>
 #include <string>
 #include <limits>
@@ -14,21 +14,21 @@
 
 using namespace std;
 
-Game::Game(Human * u, Computer * c) {
+Round::Round(Human * u, Computer * c) {
     this->board = new Board();
     this->user = u;
     this->computer = c;
 }
 
-void Game::setRound(int round) {
+void Round::setRound(int round) {
     this->round = round;
 }
 
-int Game::getRound() {
+int Round::getRound() {
     return this->round;
 }
 
-void Game::setUpBoard() {
+void Round::setUpBoard() {
     int size;
     cout << "Select board size (5, 7, or 9): ";
     cin >> size;
@@ -38,17 +38,17 @@ void Game::setUpBoard() {
     this->board->drawBoard();
 }
 
-void Game:: loadBoard(int size, string **data) {
+void Round:: loadBoard(int size, string **data) {
     this->board->set(user, computer);
     this->board->setBoard(size, data);
     this->board->drawBoard();
 }
 
-void Game::rollDice() {
+void Round::rollDice() {
     int player1Score = 11;//rand() % 10 + 2;
     int player2Score = 9;//rand() % 10 + 2;
     
-    cout << "* Rolling dice to see who goes first *" << endl;
+    cout << endl << "* Rolling dice to see who goes first *" << endl;
     cout << "Your Roll: " << player1Score << endl;
     cout << "Computers: " << player2Score << endl;
     
@@ -66,7 +66,7 @@ void Game::rollDice() {
     chooseColor();
 }
 
-void Game::chooseColor() {
+void Round::chooseColor() {
     //Print who goes first
     stringstream ss;
     if (user->getIsTurn()) {
@@ -99,12 +99,12 @@ void Game::chooseColor() {
     cout << "Computer is " << computer->getColor() << "." << endl << endl;
 }
 
-void Game::assignRandomColor() {
+void Round::assignRandomColor() {
     int color = rand() % 2;
     (color == 0) ? cout << "You are B." << endl : cout << "You are W" << endl;
 }
 
-void Game::provideMenu() {
+void Round::provideMenu() {
     //
     if (computer->getIsTurn()) {
         computerMenu();
@@ -143,7 +143,7 @@ void Game::provideMenu() {
     }
 }
 
-void Game:: computerMenu() {
+void Round:: computerMenu() {
     int choice;
     cout << "Choose an option below" << endl;
     cout << "1. Save Game" << endl;
@@ -172,7 +172,7 @@ void Game:: computerMenu() {
     }
 }
 
-void Game:: move() {
+void Round:: move() {
     //Check to see who turn it is
     int row, column;
     Direction direction;
@@ -200,9 +200,10 @@ void Game:: move() {
     }
 }
 
-void Game:: swapTurns() {
+void Round:: swapTurns() {
     user->setTurn(!user->getIsTurn());
     computer->setTurn(!computer->getIsTurn());
 }
+
 
 

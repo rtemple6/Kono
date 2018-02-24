@@ -7,36 +7,42 @@
 //
 
 #include "Tournament.hpp"
-#include "Game.hpp"
+#include "Round.hpp"
 #include <iostream>
-#include "FileReader.hpp"
 using namespace std;
 
 Tournament::Tournament() {
     this->user = new Human();
     this->computer = new Computer();
-    this->game = new Game(user, computer);
+    this->game = new Round(user, computer);
 }
 
 void Tournament::startGame() {
     cout << "Welcome to Kono!" << endl << endl;
     
     char resume;
-    cout << "Would you like to resume a previous game? (Y / N): ";
-    cin >> resume;
-    cout << endl;
-    if (resume == 'Y') {
-        resumeGame();
-    } else {
-        game->rollDice();
-        game->setUpBoard();
-        game->provideMenu();
+    bool validChar = false;
+    
+    while (!validChar) {
+        cout << "Would you like to resume a previous game? (Y / N): ";
+        cin >> resume;
+        
+        if (resume == 'Y' || resume == 'y') {
+            validChar = true;
+            string fileName = f.validateFile();
+            resumeGame(fileName);
+            
+        } else if (resume == 'N' || resume == 'n') {
+            validChar = true;
+            game->rollDice();
+            game->setUpBoard();
+            game->provideMenu();
+        }
     }
 }
 
-void Tournament::resumeGame() {
-    FileReader f;
-    f.setFileName("SavedGame.txt");
+bool Tournament::resumeGame(string filename) {
+    f.setFileName(filename);
     
     int round = f.getRound();
     cout << "Round: " << round << endl << endl;
@@ -76,5 +82,6 @@ void Tournament::resumeGame() {
     game->loadBoard(count, boardData);
     game->setRound(round);
     game->provideMenu();
+    return true;
 }
 

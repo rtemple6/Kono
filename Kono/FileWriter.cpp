@@ -13,7 +13,13 @@ FileWriter:: FileWriter() {
 }
 
 void FileWriter::saveGame(int round, int playerScore, string playerColor, int computerScore, string computerColor, Board *b, string nextPlayer) {
-    ofstream file("SavedGame.txt");
+    
+    cin.ignore(numeric_limits<streamsize>::max(), '\n');
+    string filename;
+    cout << "Enter a file name: ";
+    getline(cin, filename);
+    
+    ofstream file(filename);
     
     if (!file.is_open()) {
         cout << "Error saving file." << endl;
