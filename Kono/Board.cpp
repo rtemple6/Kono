@@ -73,6 +73,10 @@ void Board::setBoard(int size, string **data) {
     board = data;
 }
 
+string ** Board::getBoard() {
+    return board;
+}
+
 int Board::getBoardSize() {
     return this->boardSize;
 }
@@ -107,7 +111,7 @@ bool Board:: movePiece(int row, int column, Direction d) {
         string color = user->getColor();
         string userPiece = pieceAt(row, column);
         if (color != userPiece) {
-            cout << endl << "Invalid Move: Must select your piece (" << color << ")." << endl;
+            cout << endl << "Invalid Move: Must select your piece (" << color << ")." << endl << endl;
             return false;
         }
     } else {

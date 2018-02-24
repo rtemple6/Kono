@@ -27,6 +27,7 @@ public:
     Board();
     void createBoard(int size);
     void setBoard(int size, string **data);
+    string** getBoard();
     int getBoardSize();
     
     void set(Human *user, Computer *computer);

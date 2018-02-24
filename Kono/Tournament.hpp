@@ -20,12 +20,10 @@ class Tournament {
     Human *user;
     Computer *computer;
     Game * game;
-    int roundNumber = 0;
 public:
     Tournament();
     void startGame();
     void resumeGame();
-    void setRound(int round);
 };
 
 #endif /* Tournament_hpp */

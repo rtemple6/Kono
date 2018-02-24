@@ -13,14 +13,19 @@
 #include "Board.hpp"
 #include "Human.hpp"
 #include "Computer.hpp"
+#include "FileWriter.hpp"
 #include <sstream>
 
 class Game {
     Board *board;
     Human *user;
     Computer *computer;
+    int round = 1;
 public:
     Game(Human * u, Computer * c);
+    
+    void setRound(int round);
+    int getRound();
     
     void setUpBoard();
     void loadBoard(int size, string **data);

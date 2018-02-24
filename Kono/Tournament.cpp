@@ -40,7 +40,7 @@ void Tournament::resumeGame() {
     
     int round = f.getRound();
     cout << "Round: " << round << endl << endl;
-    setRound(round);
+    
     
     string nextPlayer = f.getNextPlayer();
     if (nextPlayer == "Human") {
@@ -74,10 +74,7 @@ void Tournament::resumeGame() {
     cout << "Computer score is: " << computer->getScore() << endl << endl;
     
     game->loadBoard(count, boardData);
-    
+    game->setRound(round);
     game->provideMenu();
 }
 
-void Tournament::setRound(int round) {
-    
-}

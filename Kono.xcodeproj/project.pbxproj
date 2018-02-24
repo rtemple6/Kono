@@ -16,6 +16,7 @@
 		5D30069C2017A4740065C761 /* Game.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5D30069A2017A4740065C761 /* Game.cpp */; };
 		5D30069F2017A48A0065C761 /* BoardView.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5D30069D2017A48A0065C761 /* BoardView.cpp */; };
 		5D3C1D78203F6AF300A41522 /* Direction.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5D3C1D77203F6AF300A41522 /* Direction.cpp */; };
+		9C127C502041F23400963871 /* FileWriter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9C127C4E2041F23400963871 /* FileWriter.cpp */; };
 		9CFC7A572040B13E007C437C /* FileReader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9CFC7A552040B13E007C437C /* FileReader.cpp */; };
 /* End PBXBuildFile section */
 
@@ -49,6 +50,8 @@
 		5D30069D2017A48A0065C761 /* BoardView.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = BoardView.cpp; sourceTree = "<group>"; };
 		5D30069E2017A48A0065C761 /* BoardView.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = BoardView.hpp; sourceTree = "<group>"; };
 		5D3C1D77203F6AF300A41522 /* Direction.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Direction.cpp; sourceTree = "<group>"; };
+		9C127C4E2041F23400963871 /* FileWriter.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = FileWriter.cpp; sourceTree = "<group>"; };
+		9C127C4F2041F23400963871 /* FileWriter.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = FileWriter.hpp; sourceTree = "<group>"; };
 		9CFC7A552040B13E007C437C /* FileReader.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = FileReader.cpp; sourceTree = "<group>"; };
 		9CFC7A562040B13E007C437C /* FileReader.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = FileReader.hpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -101,6 +104,8 @@
 				5D3C1D77203F6AF300A41522 /* Direction.cpp */,
 				9CFC7A562040B13E007C437C /* FileReader.hpp */,
 				9CFC7A552040B13E007C437C /* FileReader.cpp */,
+				9C127C4E2041F23400963871 /* FileWriter.cpp */,
+				9C127C4F2041F23400963871 /* FileWriter.hpp */,
 			);
 			path = Kono;
 			sourceTree = "<group>";
@@ -165,6 +170,7 @@
 				5D3006932017014D0065C761 /* Computer.cpp in Sources */,
 				5D30069F2017A48A0065C761 /* BoardView.cpp in Sources */,
 				5D30068D201701370065C761 /* Board.cpp in Sources */,
+				9C127C502041F23400963871 /* FileWriter.cpp in Sources */,
 				5D3006992017A45B0065C761 /* Tournament.cpp in Sources */,
 				9CFC7A572040B13E007C437C /* FileReader.cpp in Sources */,
 				5D3006852016FAF90065C761 /* main.cpp in Sources */,

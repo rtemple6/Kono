@@ -20,6 +20,14 @@ Game::Game(Human * u, Computer * c) {
     this->computer = c;
 }
 
+void Game::setRound(int round) {
+    this->round = round;
+}
+
+int Game::getRound() {
+    return this->round;
+}
+
 void Game::setUpBoard() {
     int size;
     cout << "Select board size (5, 7, or 9): ";
@@ -112,9 +120,12 @@ void Game::provideMenu() {
     cout << "Your choice: ";
     cin >> choice;
     
+    FileWriter write;
+    string nextPlayer;
     switch (choice) {
         case 1:
-            cout << "Saving game..." << endl;
+            (user->getIsTurn()) ? nextPlayer = "Human" : nextPlayer = "Computer";
+            write.saveGame(getRound(), user->getScore(), user->getColor(), computer->getScore(), computer->getColor(), board, nextPlayer);
             break;
         case 2:
             move();
@@ -141,9 +152,12 @@ void Game:: computerMenu() {
     cout << "Your choice: ";
     cin >> choice;
     
+    FileWriter write;
+    string nextPlayer;
     switch (choice) {
         case 1:
-            cout << "Saving game..." << endl;
+            (user->getIsTurn()) ? nextPlayer = "Human" : nextPlayer = "Computer";
+            write.saveGame(getRound(), user->getScore(), user->getColor(), computer->getScore(), computer->getColor(), board, nextPlayer);
             break;
         case 2:
             move();
