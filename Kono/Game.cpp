@@ -31,7 +31,6 @@ void Game::setUpBoard() {
 }
 
 void Game:: loadBoard(int size, string **data) {
-    cout << "User score " << user->getScore()<< endl;
     this->board->set(user, computer);
     this->board->setBoard(size, data);
     this->board->drawBoard();
@@ -100,8 +99,7 @@ void Game::assignRandomColor() {
 void Game::provideMenu() {
     //
     if (computer->getIsTurn()) {
-        cout << "It's the computers turn!" << endl;
-        move();
+        computerMenu();
         return;
     }
     
@@ -134,6 +132,32 @@ void Game::provideMenu() {
     }
 }
 
+void Game:: computerMenu() {
+    int choice;
+    cout << "Choose an option below" << endl;
+    cout << "1. Save Game" << endl;
+    cout << "2. Computer Move" << endl;
+    cout << "3. Quit Game" << endl << endl;
+    cout << "Your choice: ";
+    cin >> choice;
+    
+    switch (choice) {
+        case 1:
+            cout << "Saving game..." << endl;
+            break;
+        case 2:
+            move();
+            break;
+        case 3:
+            cout << "Quitting game..." << endl;
+            break;
+        default:
+            cout << "Invalid choice: " << choice << endl << endl;
+            computerMenu();
+            break;
+    }
+}
+
 void Game:: move() {
     //Check to see who turn it is
     int row, column;
@@ -145,9 +169,9 @@ void Game:: move() {
             cout << "You successfully moved piece!" << endl << endl;
             board->drawBoard();
             swapTurns();
-            move();
+            provideMenu();
         } else {
-            move();
+            provideMenu();
         }
     } else {
         tie(row, column, direction) = computer->play();

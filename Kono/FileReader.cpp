@@ -31,7 +31,6 @@ string ** FileReader:: createBoard(int size, string data[]) {
     int tmpCounter = 0;
     for (int i = 0; i < size; i++) {
         for (int j = 0; j < size; j++) {
-            cout << "Board[" << i << "][" << j << "] is data[" << i + j << "] : " << data[i+j] << endl;
             board[i][j] = data[tmpCounter];
             tmpCounter++;
         }
@@ -111,9 +110,8 @@ string FileReader::getComputerColor() {
     }
     computer.erase(0, 10);
     
-    
     closeFile();
-    return computer;
+    return computer.substr(0, 1);
 }
 
 int FileReader::getPlayerScore() {
@@ -148,9 +146,8 @@ string FileReader::getPlayerColor() {
     }
     player.erase(0, 10);
     
-    
     closeFile();
-    return player;
+    return player.substr(0, 1);
 }
 
 tuple<int, string**> FileReader:: getBoard() {
@@ -180,7 +177,6 @@ tuple<int, string**> FileReader:: getBoard() {
     switch (tempCounter) {
         case 25:
             //5 x 5
-            
             return make_tuple(5, createBoard(5, boardCount));
             break;
         case 49:

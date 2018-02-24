@@ -28,7 +28,10 @@ public:
     void rollDice();
     void chooseColor();
     void assignRandomColor();
+    
     void provideMenu();
+    void computerMenu();
+    
     void move();
     void swapTurns();
 };

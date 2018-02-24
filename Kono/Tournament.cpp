@@ -39,7 +39,7 @@ void Tournament::resumeGame() {
     f.setFileName("SavedGame.txt");
     
     int round = f.getRound();
-    cout << "Round: " << round << endl;
+    cout << "Round: " << round << endl << endl;
     setRound(round);
     
     string nextPlayer = f.getNextPlayer();
@@ -67,7 +67,15 @@ void Tournament::resumeGame() {
     string ** boardData;
     tie(count, boardData) = f.getBoard();
     
+    cout << "You are " << user->getColor() << "." << endl;
+    cout << "Computer is " << computer->getColor() << "." << endl << endl;
+    
+    cout << "Your score is: " << user->getScore() << endl;
+    cout << "Computer score is: " << computer->getScore() << endl << endl;
+    
     game->loadBoard(count, boardData);
+    
+    game->provideMenu();
 }
 
 void Tournament::setRound(int round) {
