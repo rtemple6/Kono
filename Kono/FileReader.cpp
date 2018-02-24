@@ -20,6 +20,26 @@ void FileReader::closeFile() {
     stream.close();
 }
 
+string ** FileReader:: createBoard(int size, string data[]) {
+    //Init board
+    string ** board = new string *[size];
+    for(int i = 0; i < size; i++) {
+        board[i] = new string[size];
+    }
+    
+    //Fill board
+    int tmpCounter = 0;
+    for (int i = 0; i < size; i++) {
+        for (int j = 0; j < size; j++) {
+            cout << "Board[" << i << "][" << j << "] is data[" << i + j << "] : " << data[i+j] << endl;
+            board[i][j] = data[tmpCounter];
+            tmpCounter++;
+        }
+    }
+    
+    return board;
+}
+
 void FileReader::setFileName(string name) {
     filename = name;
 }
@@ -133,20 +153,51 @@ string FileReader::getPlayerColor() {
     return player;
 }
 
+tuple<int, string**> FileReader:: getBoard() {
+    
+    openFile();
+    
+    
+    //Place all the letters into a 1D array.
+    string boardCount[500];
+    
+    //Keep count to know boardSize (5, 7, 9)
+    int tempCounter = 0;
+    
+    string boardIn;
+    for (int i = 1; !stream.eof() ; i++) {
+        stream >> boardIn;
+        if (i < 13) continue;
+        
+        //Append to our array if its a piece
+        if (boardIn == "B" || boardIn == "BB" || boardIn == "W" || boardIn == "WW" || boardIn == "O") {
+            boardCount[tempCounter] = boardIn;
+            tempCounter++;
+        }
+    }
+    
+    //Extract data in array to be a 2d array.
+    switch (tempCounter) {
+        case 25:
+            //5 x 5
+            
+            return make_tuple(5, createBoard(5, boardCount));
+            break;
+        case 49:
+            //7 x 7
+            return make_tuple(7, createBoard(7, boardCount));
+            break;
+        case 81:
+            //9 x 9
+            return make_tuple(7, createBoard(7, boardCount));
+            break;
+        default:
+            break;
+    }
+    
+    
+    return make_tuple(0, createBoard(0, boardCount));
+}
 
-//
-//gameData.close();
-//gameData.open("SavedGame.txt");
-//
-//string boardIn, board;
-//for (int i = 1; !gameData.eof() ; i++) {
-//    gameData >> boardIn;
-//    if (i < 13) continue;
-//    board.append(boardIn);
-//}
-//string delimiter = "NextPlayer";
-//board = board.substr(0, board.find(delimiter));
-//board.erase(0, 6);
-//cout << "Board: " << board << endl;
-//gameData.close();
+
 

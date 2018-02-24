@@ -32,7 +32,6 @@ void Tournament::startGame() {
         game->setUpBoard();
         game->provideMenu();
     }
-    
 }
 
 void Tournament::resumeGame() {
@@ -41,23 +40,34 @@ void Tournament::resumeGame() {
     
     int round = f.getRound();
     cout << "Round: " << round << endl;
+    setRound(round);
     
     string nextPlayer = f.getNextPlayer();
-    cout << "Next Player: " << nextPlayer << endl;
+    if (nextPlayer == "Human") {
+        user->setTurn(true);
+        computer->setTurn(false);
+    } else {
+        user->setTurn(false);
+        computer->setTurn(true);
+    }
     
     int computerScore = f.getComputerScore();
-    cout << "Computer score: " << computerScore << endl;
+    computer->setScore(computerScore);
     
     string computerColor = f.getComputerColor();
-    cout << "Computer color: " << computerColor << endl;
+    computer->setColor(computerColor);
     
     int playerScore = f.getPlayerScore();
-    cout << "Player score: " << playerScore << endl;
+    user->setScore(playerScore);
     
     string playerColor = f.getPlayerColor();
-    cout << "Player color: " << playerColor << endl;
+    user->setColor(playerColor);
     
+    int count;
+    string ** boardData;
+    tie(count, boardData) = f.getBoard();
     
+    game->loadBoard(count, boardData);
 }
 
 void Tournament::setRound(int round) {

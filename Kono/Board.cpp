@@ -68,6 +68,11 @@ void Board::createBoard(int size) {
     }
 }
 
+void Board::setBoard(int size, string **data) {
+    boardSize = size;
+    board = data;
+}
+
 int Board::getBoardSize() {
     return this->boardSize;
 }

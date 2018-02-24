@@ -20,6 +20,14 @@ bool Player:: getIsTurn() {
     return this->isTurn;
 }
 
+void Player::setScore(int score) {
+    this->score = score;
+}
+
+int Player::getScore() {
+    return score;
+}
+
 void Player::setColor(string color) {
     this->color = color;
 }

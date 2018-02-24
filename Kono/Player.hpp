@@ -21,10 +21,14 @@ using namespace std;
 class Player {
     bool isTurn = false;
     string color;
+    int score;
 public:
     Player();
     void setTurn(bool turn);
     bool getIsTurn();
+    
+    void setScore(int score);
+    int getScore();
     
     void setColor(string color);
     string getColor();

@@ -30,6 +30,13 @@ void Game::setUpBoard() {
     this->board->drawBoard();
 }
 
+void Game:: loadBoard(int size, string **data) {
+    cout << "User score " << user->getScore()<< endl;
+    this->board->set(user, computer);
+    this->board->setBoard(size, data);
+    this->board->drawBoard();
+}
+
 void Game::rollDice() {
     int player1Score = 11;//rand() % 10 + 2;
     int player2Score = 9;//rand() % 10 + 2;

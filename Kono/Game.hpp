@@ -21,7 +21,10 @@ class Game {
     Computer *computer;
 public:
     Game(Human * u, Computer * c);
+    
     void setUpBoard();
+    void loadBoard(int size, string **data);
+    
     void rollDice();
     void chooseColor();
     void assignRandomColor();
