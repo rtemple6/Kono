@@ -189,7 +189,7 @@ tuple<int, string**> FileReader:: getBoard() {
             break;
         case 81:
             //9 x 9
-            return make_tuple(7, createBoard(7, boardCount));
+            return make_tuple(9, createBoard(9, boardCount));
             break;
         default:
             break;
