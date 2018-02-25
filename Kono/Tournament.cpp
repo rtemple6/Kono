@@ -47,7 +47,6 @@ bool Tournament::resumeGame(string filename) {
     int round = f.getRound();
     cout << "Round: " << round << endl << endl;
     
-    
     string nextPlayer = f.getNextPlayer();
     if (nextPlayer == "Human") {
         user->setTurn(true);
