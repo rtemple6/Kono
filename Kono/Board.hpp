@@ -35,6 +35,11 @@ public:
         
     bool movePiece(int row, int column, Direction d);
     tuple<bool, Direction> validateDirection(string direction);
+    
+    bool checkForWinner();
+    
+    string getWinnerPiece();
+    int getScore(string piece);
 };
 
 #endif /* Board_hpp */

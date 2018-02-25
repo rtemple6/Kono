@@ -27,18 +27,21 @@ public:
     void setRound(int round);
     int getRound();
     
+    void nextRound(string winner);
+    
     void setUpBoard();
     void loadBoard(int size, string **data);
     
     void rollDice();
     void chooseColor();
-    void assignRandomColor();
-    
+
     void provideMenu();
     void computerMenu();
     
     void move();
     void swapTurns();
+    
+    void endRound();
 };
 
 #endif /* Game_hpp */

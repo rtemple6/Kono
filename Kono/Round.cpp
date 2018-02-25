@@ -29,7 +29,7 @@ int Round::getRound() {
 }
 
 void Round::setUpBoard() {
-    int size;
+    int size = 5;
     bool validSize = false;
     while (!validSize) {
         cout << "Select board size (5, 7, or 9): ";
@@ -60,12 +60,14 @@ void Round:: loadBoard(int size, string **data) {
 }
 
 void Round::rollDice() {
+    cout << endl << "Round " << getRound() << endl << endl;
+    
     int player1Score = 11;//rand() % 10 + 2;
     int player2Score = 9;//rand() % 10 + 2;
     
-    cout << endl << "* Rolling dice to see who goes first *" << endl;
-    cout << "Your Roll: " << player1Score << endl;
-    cout << "Computers: " << player2Score << endl;
+    cout << "* Rolling dice to see who goes first *" << endl << endl;
+    cout << "You Rolled: " << player1Score << endl;
+    cout << "Computer Rolled: " << player2Score << endl;
     
     //If they are same value, recursively call determine order.
     if (player1Score == player2Score) {
@@ -81,13 +83,28 @@ void Round::rollDice() {
     chooseColor();
 }
 
+void Round::nextRound(string winner) {
+    if (winner == "Human") {
+        user->setTurn(true);
+        computer->setTurn(false);
+    } else {
+        cout << "Computer won the previous round so he chooses color." << endl << endl;
+        computer->setTurn(true);
+        user->setTurn(false);
+    }
+    
+    chooseColor();
+}
+
 void Round::chooseColor() {
     //Print who goes first
     stringstream ss;
+    cout << endl;
     if (user->getIsTurn()) {
         cout << "Choose your color (B or W): ";
         char color, upperColor;
         cin >> color;
+        
         upperColor = toupper(color);
         if (upperColor != 'B') {
             if (upperColor != 'W') {
@@ -106,17 +123,13 @@ void Round::chooseColor() {
         (upperColor == 'B') ? computer->setColor("W") : computer->setColor("B");
     } else {
         computer->setColor("W");
-        user->setColor("W");
+        user->setColor("B");
     }
     
     cout << "You are " << user->getColor() << "." << endl;
     cout << "Computer is " << computer->getColor() << "." << endl << endl;
 }
 
-void Round::assignRandomColor() {
-    int color = rand() % 2;
-    (color == 0) ? cout << "You are B." << endl : cout << "You are W" << endl;
-}
 
 void Round::provideMenu() {
     //
@@ -131,8 +144,7 @@ void Round::provideMenu() {
     cout << "3. Suggest Move" << endl;
     cout << "4. Quit Game" << endl << endl;
     
-    int choice;
-    
+    int choice = 1;
     
     bool validChoice = false;
     while (!validChoice) {
@@ -152,7 +164,6 @@ void Round::provideMenu() {
 
     }
     
-    
     FileWriter write;
     string nextPlayer;
     switch (choice) {
@@ -167,7 +178,7 @@ void Round::provideMenu() {
             cout << "Suggesting move..." << endl;
             break;
         case 4:
-            cout << "Quitting game..." << endl;
+            endRound();
             break;
         default:
             cout << "Invalid choice: " << choice << endl << endl;
@@ -177,7 +188,7 @@ void Round::provideMenu() {
 }
 
 void Round:: computerMenu() {
-    int choice;
+    int choice = 1;
     cout << "Choose an option below" << endl;
     cout << "1. Save Game" << endl;
     cout << "2. Computer Move" << endl;
@@ -198,7 +209,6 @@ void Round:: computerMenu() {
                 validChoice = true;
             }
         }
-        
     }
     
     FileWriter write;
@@ -212,7 +222,7 @@ void Round:: computerMenu() {
             move();
             break;
         case 3:
-            cout << "Quitting game..." << endl;
+            endRound();
             break;
         default:
             cout << "Invalid choice: " << choice << endl << endl;
@@ -228,8 +238,17 @@ void Round:: move() {
         computer->play();
     }
     
-    swapTurns();
-    provideMenu();
+    if (board->checkForWinner()) {
+        if (user->getColor() == board->getWinnerPiece()) {
+            cout << "You got all your pieces in the home points of the computer!" << endl << endl;
+        } else {
+            cout << "Dang... The computer got all his pieces in your home points. Better luck next round!" << endl;
+        }
+        endRound();
+    } else{
+        swapTurns();
+        provideMenu();
+    }
 }
 
 void Round:: swapTurns() {
@@ -237,5 +256,55 @@ void Round:: swapTurns() {
     computer->setTurn(!computer->getIsTurn());
 }
 
-
+void Round::endRound() {
+    int userScore = board->getScore(user->getColor());
+    int computerScore = board->getScore(computer->getColor());
+    cout << "You scored: " << userScore << endl;
+    cout << "Computer scored: " << computerScore << endl << endl;
+    
+    user->setScore(user->getScore() + userScore);
+    computer->setScore(computer->getScore() + computerScore);
+    
+    cout << "Your total score now is " << user->getScore() << endl;
+    cout << "Computers total score now is " << computer->getScore() << endl << endl;
+    
+    bool validInput = false;
+    
+    while (!validInput) {
+        char input, upperInput;
+        cout << "Would you like to play another round? (Y / N): ";
+        cin >> input;
+        
+        upperInput = toupper(input);
+        if (upperInput == 'Y' || upperInput == 'N') {
+            if (upperInput == 'Y') {
+                setRound(getRound() + 1);
+                string winner;
+                if (userScore >= computerScore) {
+                    winner = "Human";
+                } else {
+                    winner = "Computer";
+                }
+                nextRound(winner);
+                setUpBoard();
+                provideMenu();
+            } else {
+                cout << endl;
+                if (user->getScore() > computer->getScore()) {
+                    cout << "Congratulations you beat the computer and won the Kono tournament!" << endl << endl;
+                } else if (user->getScore() < computer->getScore()) {
+                    cout << "You got beat by the computer and lost the Kono tournament. :(" << endl << endl;
+                } else {
+                    cout << "It's a draw! You and the computer tied." << endl << endl;
+                }
+                
+                cout << "Final Scores" << endl;
+                cout << "You: " << user->getScore() << endl;
+                cout << "Computer: " << computer->getScore() << endl << endl;
+                
+            }
+            validInput = true;
+        }
+    }
+}
 

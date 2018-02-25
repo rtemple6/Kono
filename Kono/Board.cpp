@@ -173,3 +173,22 @@ tuple<bool, Direction> Board:: validateDirection(string direction){
     
     return make_tuple(true, d);
 }
+
+bool Board::checkForWinner() {
+    //See how many pieces a player has.
+    //If all those pieces occupy the opponents home pieces, that player wins, return true;
+    return true;
+}
+
+string Board::getWinnerPiece() {
+    return "B";
+}
+
+int Board::getScore(string piece) {
+    if (piece == "B") {
+        //Calcuate B points
+        return 11;
+    } else {
+        return 11;
+    }
+}
