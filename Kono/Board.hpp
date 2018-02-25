@@ -10,17 +10,14 @@
 #define Board_hpp
 
 #include <stdio.h>
-#include "Human.hpp"
-#include "Computer.hpp"
-
+#include <iostream>
+#include "Direction.cpp"
+using namespace std;
 
 class Board {
     int boardSize;
     //2 Dimensional array to hold board
     string ** board;
-    Human *user;
-    Computer *computer;
-    bool isValidMove(int row, int column);
     bool isPieceAtLocation(int row, int column);
     
 public:
@@ -29,8 +26,6 @@ public:
     void setBoard(int size, string **data);
     string** getBoard();
     int getBoardSize();
-    
-    void set(Human *user, Computer *computer);
     
     string pieceAt(int row, int column);
     

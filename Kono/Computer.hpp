@@ -16,7 +16,7 @@ using namespace std;
 class Computer: public Player {
 public:
     Computer();
-    tuple<int, int, Direction> play();
+    void play();
 };
 
 #endif /* Computer_hpp */

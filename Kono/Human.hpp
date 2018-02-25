@@ -21,7 +21,8 @@ class Human: public Player {
     tuple<bool, Direction> validateDirection(string direction);
 public:
     Human();
-    tuple<int, int, Direction> play();
+    void play();
+    bool isValidMove(int row, int column);
 };
 
 #endif /* Human_hpp */

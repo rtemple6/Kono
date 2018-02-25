@@ -33,14 +33,16 @@ void Round::setUpBoard() {
     cout << "Select board size (5, 7, or 9): ";
     cin >> size;
     cout << endl;
-    this->board->set(user, computer);
     this->board->createBoard(size);
+    this->user->setBoard(board);
+    this->computer->setBoard(board);
     this->board->drawBoard();
 }
 
 void Round:: loadBoard(int size, string **data) {
-    this->board->set(user, computer);
     this->board->setBoard(size, data);
+    this->user->setBoard(board);
+    this->computer->setBoard(board);
     this->board->drawBoard();
 }
 
@@ -177,26 +179,30 @@ void Round:: move() {
     int row, column;
     Direction direction;
     if (user->getIsTurn()) {
+        user->play();
+        swapTurns();
+        provideMenu();
         //Gets a tuple with the 3 values. They can be individually accessed.
-        tie(row, column, direction) = user->play();
-        if (board->movePiece(row, column, direction)) {
-            cout << "You successfully moved piece!" << endl << endl;
-            board->drawBoard();
-            swapTurns();
-            provideMenu();
-        } else {
-            provideMenu();
-        }
+//        tie(row, column, direction) = user->play();
+//        if (board->movePiece(row, column, direction)) {
+//            cout << "You successfully moved piece!" << endl << endl;
+//            board->drawBoard();
+//            swapTurns();
+//            provideMenu();
+//        } else {
+//            provideMenu();
+//        }
     } else {
-        tie(row, column, direction) = computer->play();
-        if (board->movePiece(row, column, direction)) {
-            cout << "Computer successfully moved piece!" << endl << endl;
-            board->drawBoard();
-            swapTurns();
-            provideMenu();
-        } else {
-            cout << "Error moving computer piece: " << endl;
-        }
+        computer->play();
+//        tie(row, column, direction) = computer->play();
+//        if (board->movePiece(row, column, direction)) {
+//            cout << "Computer successfully moved piece!" << endl << endl;
+//            board->drawBoard();
+//            swapTurns();
+//            provideMenu();
+//        } else {
+//            cout << "Error moving computer piece: " << endl;
+//        }
     }
 }
 

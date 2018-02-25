@@ -20,6 +20,14 @@ bool Player:: getIsTurn() {
     return this->isTurn;
 }
 
+void Player::setBoard(Board *b) {
+    this->board = b;
+}
+
+Board* Player::getBoard() {
+    return board;
+}
+
 void Player::setScore(int score) {
     this->score = score;
 }
@@ -36,6 +44,6 @@ string Player::getColor() {
     return this->color;
 }
 
-tuple<int, int, Direction> Player::play() {
-    return make_tuple(0, 0, NW);
+void Player::play() {
+    
 }
