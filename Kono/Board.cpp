@@ -12,6 +12,62 @@
 Board::Board() {
 }
 
+int Board::getPieceCount(string color) {
+    int count = 0;
+    for (int i = 0; i < getBoardSize(); i++) {
+        for (int j = 0; j < getBoardSize(); j++) {
+            string piece = pieceAt(i, j);
+            if (piece == color || piece == color + color) {
+                count++;
+            }
+        }
+    }
+    return count;
+}
+
+int Board::getPiecesScoredCount(string color) {
+    int tmp = getBoardSize() - 1;
+    int count = 0;
+    //See if all black pieces are in top row/first-last position in second row
+    for (int i = 0; i < getBoardSize(); i++) {
+        for (int j = 0; j < getBoardSize(); j++) {
+            string piece = pieceAt(i, j);
+            
+            if (color == "B") {
+                
+                //Black pieces
+                if (i == 0) {
+                    if (piece == color || piece == color + color) {
+                        count++;
+                    }
+                } else if (i == 1) {
+                    if (j == 0 || j == tmp) {
+                        if (piece == color || piece == color + color) {
+                            count++;
+                        }
+                    }
+                }
+            } else {
+                
+                //White pieces
+                if (i == tmp) {
+                    if (piece == color || piece == color + color) {
+                        count++;
+                    }
+                } else if (i == tmp - 1) {
+                    if (j == 0 || j == tmp) {
+                        if (piece == color || piece == color + color) {
+                            count++;
+                        }
+                    }
+                }
+            }
+            
+        }
+    }
+    return count;
+}
+
 void Board::createBoard(int size) {
     this->boardSize = size;
     
@@ -175,13 +231,31 @@ tuple<bool, Direction> Board:: validateDirection(string direction){
 }
 
 bool Board::checkForWinner() {
-    //See how many pieces a player has.
-    //If all those pieces occupy the opponents home pieces, that player wins, return true;
-    return true;
+    int blackPieces = getPieceCount("B");
+    int whitePieces = getPieceCount("W");
+    
+    int blackHomePieceCount = getPiecesScoredCount("B");
+    int whiteHomePieceCount = getPiecesScoredCount("W");
+    
+    if (blackHomePieceCount == blackPieces) {
+        setWinnerPiece("B");
+        return true;
+    }
+    
+    if (whiteHomePieceCount == whitePieces) {
+        setWinnerPiece("W");
+        return true;
+    }
+    
+    return false;
+}
+
+void Board::setWinnerPiece(string piece) {
+    this->winnerPiece = piece;
 }
 
 string Board::getWinnerPiece() {
-    return "B";
+    return winnerPiece;
 }
 
 int Board::getScore(string piece) {

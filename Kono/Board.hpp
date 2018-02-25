@@ -21,6 +21,10 @@ class Board {
     string ** board;
     bool isPieceAtLocation(int row, int column);
     
+    int getPieceCount(string color);
+    int getPiecesScoredCount(string color);
+    
+    string winnerPiece = "B";
 public:
     Board();
     void createBoard(int size);
@@ -38,7 +42,9 @@ public:
     
     bool checkForWinner();
     
+    void setWinnerPiece(string piece);
     string getWinnerPiece();
+    
     int getScore(string piece);
 };
 
