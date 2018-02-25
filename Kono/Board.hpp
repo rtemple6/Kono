@@ -12,6 +12,7 @@
 #include <stdio.h>
 #include <iostream>
 #include "Direction.cpp"
+#include <tuple>
 using namespace std;
 
 class Board {
@@ -33,6 +34,7 @@ public:
     void drawBoard();
         
     bool movePiece(int row, int column, Direction d);
+    tuple<bool, Direction> validateDirection(string direction);
 };
 
 #endif /* Board_hpp */

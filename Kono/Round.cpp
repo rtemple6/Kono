@@ -30,8 +30,21 @@ int Round::getRound() {
 
 void Round::setUpBoard() {
     int size;
-    cout << "Select board size (5, 7, or 9): ";
-    cin >> size;
+    bool validSize = false;
+    while (!validSize) {
+        cout << "Select board size (5, 7, or 9): ";
+        cin >> size;
+        while(cin.fail()) {
+            cout << "Select board size (5, 7, or 9): ";
+            cin.clear();
+            cin.ignore(256,'\n');
+            cin >> size;
+        }
+        if (size == 5 || size == 7 || size == 9) {
+            validSize = true;
+        } 
+    }
+    
     cout << endl;
     this->board->createBoard(size);
     this->user->setBoard(board);
@@ -78,7 +91,6 @@ void Round::chooseColor() {
         upperColor = toupper(color);
         if (upperColor != 'B') {
             if (upperColor != 'W') {
-                cout << "Invalid Input: " << color << endl;
                 chooseColor();
                 return;
             }
@@ -113,14 +125,33 @@ void Round::provideMenu() {
         return;
     }
     
-    int choice;
     cout << "Choose an option below" << endl;
     cout << "1. Save Game" << endl;
     cout << "2. Make A Move" << endl;
     cout << "3. Suggest Move" << endl;
     cout << "4. Quit Game" << endl << endl;
-    cout << "Your choice: ";
-    cin >> choice;
+    
+    int choice;
+    
+    
+    bool validChoice = false;
+    while (!validChoice) {
+        cout << "Your choice: ";
+        cin >> choice;
+        while(cin.fail()) {
+            cout << "Your choice: ";
+            cin.clear();
+            cin.ignore(256,'\n');
+            cin >> choice;
+        }
+        if (!cin.fail()) {
+            if (choice == 1 || choice == 2 || choice == 3 || choice == 4) {
+                validChoice = true;
+            }
+        }
+
+    }
+    
     
     FileWriter write;
     string nextPlayer;
@@ -151,8 +182,24 @@ void Round:: computerMenu() {
     cout << "1. Save Game" << endl;
     cout << "2. Computer Move" << endl;
     cout << "3. Quit Game" << endl << endl;
-    cout << "Your choice: ";
-    cin >> choice;
+    
+    bool validChoice = false;
+    while (!validChoice) {
+        cout << "Your choice: ";
+        cin >> choice;
+        while(cin.fail()) {
+            cout << "Your choice: ";
+            cin.clear();
+            cin.ignore(256,'\n');
+            cin >> choice;
+        }
+        if (!cin.fail()) {
+            if (choice == 1 || choice == 2 || choice == 3) {
+                validChoice = true;
+            }
+        }
+        
+    }
     
     FileWriter write;
     string nextPlayer;
@@ -175,35 +222,14 @@ void Round:: computerMenu() {
 }
 
 void Round:: move() {
-    //Check to see who turn it is
-    int row, column;
-    Direction direction;
     if (user->getIsTurn()) {
         user->play();
-        swapTurns();
-        provideMenu();
-        //Gets a tuple with the 3 values. They can be individually accessed.
-//        tie(row, column, direction) = user->play();
-//        if (board->movePiece(row, column, direction)) {
-//            cout << "You successfully moved piece!" << endl << endl;
-//            board->drawBoard();
-//            swapTurns();
-//            provideMenu();
-//        } else {
-//            provideMenu();
-//        }
     } else {
         computer->play();
-//        tie(row, column, direction) = computer->play();
-//        if (board->movePiece(row, column, direction)) {
-//            cout << "Computer successfully moved piece!" << endl << endl;
-//            board->drawBoard();
-//            swapTurns();
-//            provideMenu();
-//        } else {
-//            cout << "Error moving computer piece: " << endl;
-//        }
     }
+    
+    swapTurns();
+    provideMenu();
 }
 
 void Round:: swapTurns() {

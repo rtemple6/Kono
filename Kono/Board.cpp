@@ -102,7 +102,7 @@ bool Board:: movePiece(int row, int column, Direction d) {
     bool retVal = false;
     switch (d) {
         case NE:
-            cout << "Moving piece at row: " << row << " column: " << column << pieceAt(row, column);
+            cout << "Moving piece at row: " << row << " column: " << column;
             cout << " to row: " << row - 1 << " column: " << column + 1 << endl;
             board[row - 1][column + 1] = pieceAt(row, column);
             board[row][column] = 'O';
@@ -146,4 +146,30 @@ bool Board::isPieceAtLocation(int row, int column) {
     //Check to see if there is a piece there.
     //Check to see if it is out of the bounds.
     return false;
+}
+
+tuple<bool, Direction> Board:: validateDirection(string direction){
+    
+    if (direction.empty()) {
+        return make_tuple(false, NE);
+    }
+    
+    Direction d;
+    
+    //Make it uppercase
+    transform(direction.begin(), direction.end(), direction.begin(), ::toupper);
+    
+    if (direction == "NE") {
+        d = NE;
+    } else if (direction == "NW") {
+        d = NW;
+    } else if (direction == "SE") {
+        d = SE;
+    } else if (direction == "SW") {
+        d = SW;
+    } else {
+        return make_tuple(false, NE);
+    }
+    
+    return make_tuple(true, d);
 }
