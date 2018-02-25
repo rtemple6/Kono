@@ -88,7 +88,7 @@ void Round::nextRound(string winner) {
         user->setTurn(true);
         computer->setTurn(false);
     } else {
-        cout << "Computer won the previous round so he chooses color." << endl << endl;
+        cout << endl << "Computer won the previous round so he chooses color." << endl;
         computer->setTurn(true);
         user->setTurn(false);
     }
@@ -178,7 +178,7 @@ void Round::provideMenu() {
             cout << "Suggesting move..." << endl;
             break;
         case 4:
-            endRound();
+            endRound(true, "Human");
             break;
         default:
             cout << "Invalid choice: " << choice << endl << endl;
@@ -222,7 +222,7 @@ void Round:: computerMenu() {
             move();
             break;
         case 3:
-            endRound();
+            endRound(true, "Computer");
             break;
         default:
             cout << "Invalid choice: " << choice << endl << endl;
@@ -244,7 +244,7 @@ void Round:: move() {
         } else {
             cout << "Dang... The computer got all his pieces in your home points. Better luck next round!" << endl;
         }
-        endRound();
+        endRound(false, "");
     } else{
         swapTurns();
         provideMenu();
@@ -256,17 +256,38 @@ void Round:: swapTurns() {
     computer->setTurn(!computer->getIsTurn());
 }
 
-void Round::endRound() {
+void Round::endRound(bool didQuit, string quitter) {
+    
+    cout << endl << "Round over!" << endl;
     int userScore = board->getScore(user->getColor());
     int computerScore = board->getScore(computer->getColor());
-    cout << "You scored: " << userScore << endl;
+    
+    if (didQuit) {
+        if (quitter == "Human") {
+            userScore = userScore - 5;
+        } else {
+            computerScore = computerScore - 5;
+        }
+    }
+    
+    cout << endl << "You scored: " << userScore << endl;
     cout << "Computer scored: " << computerScore << endl << endl;
     
-    user->setScore(user->getScore() + userScore);
-    computer->setScore(computer->getScore() + computerScore);
+    if (userScore > computerScore) {
+        int score = userScore - computerScore;
+        cout << "You are awarded: " << score << " points" << endl;
+        user->setScore(user->getScore() + score);
+    } else if(computerScore > userScore) {
+        int score = computerScore - userScore;
+        cout << "Computer was rewarded: " << score << " points" << endl;
+        computer->setScore(computer->getScore() + score);
+    } else {
+        cout << "No one was rewarded any points." << endl;
+    }
     
-    cout << "Your total score now is " << user->getScore() << endl;
-    cout << "Computers total score now is " << computer->getScore() << endl << endl;
+    cout << endl << "Tournament scores" << endl;
+    cout << "You: " << user->getScore() << endl;
+    cout << "Computer: " << computer->getScore() << endl << endl;
     
     bool validInput = false;
     

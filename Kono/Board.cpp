@@ -32,7 +32,6 @@ int Board::getPiecesScoredCount(string color) {
     for (int i = 0; i < getBoardSize(); i++) {
         for (int j = 0; j < getBoardSize(); j++) {
             string piece = pieceAt(i, j);
-            
             if (color == "B") {
                 
                 //Black pieces
@@ -259,10 +258,306 @@ string Board::getWinnerPiece() {
 }
 
 int Board::getScore(string piece) {
-    if (piece == "B") {
-        //Calcuate B points
-        return 11;
-    } else {
-        return 11;
+    int tmp = getBoardSize() - 1;
+    int score = 0;
+    for (int i = 0; i < getBoardSize(); i++) {
+        for (int j = 0; j < getBoardSize(); j++) {
+            string pieceAtLocation = pieceAt(i, j);
+            
+            if(piece == "B") {
+                if (i == 0) {
+                    //First row
+                    switch (getBoardSize()) {
+                        case 5:
+                            switch (j) {
+                                case 0:
+                                    if (pieceAtLocation == piece || pieceAtLocation == piece + piece) {
+                                        score = score + 3;
+                                    }
+                                    break;
+                                case 1:
+                                    if (pieceAtLocation == piece || pieceAtLocation == piece + piece) {
+                                        score = score + 1;
+                                    }
+                                    break;
+                                case 2:
+                                    if (pieceAtLocation == piece || pieceAtLocation == piece + piece) {
+                                        score = score + 5;
+                                    }
+                                    break;
+                                case 3:
+                                    if (pieceAtLocation == piece || pieceAtLocation == piece + piece) {
+                                        score = score + 1;
+                                    }
+                                    break;
+                                case 4:
+                                    if (pieceAtLocation == piece || pieceAtLocation == piece + piece) {
+                                        score = score + 3;
+                                    }
+                                    break;
+                                default:
+                                    break;
+                            }
+                            break;
+                        case 7:
+                            switch (j) {
+                                case 0:
+                                    if (pieceAtLocation == piece || pieceAtLocation == piece + piece) {
+                                        score = score + 3;
+                                    }
+                                    break;
+                                case 1:
+                                    if (pieceAtLocation == piece || pieceAtLocation == piece + piece) {
+                                        score = score + 1;
+                                    }
+                                    break;
+                                case 2:
+                                    if (pieceAtLocation == piece || pieceAtLocation == piece + piece) {
+                                        score = score + 5;
+                                    }
+                                    break;
+                                case 3:
+                                    if (pieceAtLocation == piece || pieceAtLocation == piece + piece) {
+                                        score = score + 7;
+                                    }
+                                    break;
+                                case 4:
+                                    if (pieceAtLocation == piece || pieceAtLocation == piece + piece) {
+                                        score = score + 5;
+                                    }
+                                    break;
+                                case 5:
+                                    if (pieceAtLocation == piece || pieceAtLocation == piece + piece) {
+                                        score = score + 1;
+                                    }
+                                    break;
+                                case 6:
+                                    if (pieceAtLocation == piece || pieceAtLocation == piece + piece) {
+                                        score = score + 3;
+                                    }
+                                    break;
+                                default:
+                                    break;
+                            }
+                            break;
+                        case 9:
+                            switch (j) {
+                                case 0:
+                                    if (pieceAtLocation == piece || pieceAtLocation == piece + piece) {
+                                        score = score + 3;
+                                    }
+                                    break;
+                                case 1:
+                                    if (pieceAtLocation == piece || pieceAtLocation == piece + piece) {
+                                        score = score + 1;
+                                    }
+                                    break;
+                                case 2:
+                                    if (pieceAtLocation == piece || pieceAtLocation == piece + piece) {
+                                        score = score + 5;
+                                    }
+                                    break;
+                                case 3:
+                                    if (pieceAtLocation == piece || pieceAtLocation == piece + piece) {
+                                        score = score + 7;
+                                    }
+                                    break;
+                                case 4:
+                                    if (pieceAtLocation == piece || pieceAtLocation == piece + piece) {
+                                        score = score + 9;
+                                    }
+                                    break;
+                                case 5:
+                                    if (pieceAtLocation == piece || pieceAtLocation == piece + piece) {
+                                        score = score + 7;
+                                    }
+                                    break;
+                                case 6:
+                                    if (pieceAtLocation == piece || pieceAtLocation == piece + piece) {
+                                        score = score + 5;
+                                    }
+                                    break;
+                                case 7:
+                                    if (pieceAtLocation == piece || pieceAtLocation == piece + piece) {
+                                        score = score + 1;
+                                    }
+                                    break;
+                                case 8:
+                                    if (pieceAtLocation == piece || pieceAtLocation == piece + piece) {
+                                        score = score + 3;
+                                    }
+                                    break;
+                                default:
+                                    break;
+                            }
+                            break;
+                            
+                        default:
+                            break;
+                    }
+                } else if (i == 1) {
+                    //Second row
+                    if (j == 0 || j == tmp) {
+                        if (pieceAtLocation == piece || pieceAtLocation == piece + piece) {
+                            score = score + 1;
+                        }
+                    }
+                }
+            } else {
+                if (i == getBoardSize() - 1) {
+                    //First row
+                    switch (getBoardSize()) {
+                        case 5:
+                            switch (j) {
+                                case 0:
+                                    if (pieceAtLocation == piece || pieceAtLocation == piece + piece) {
+                                        score = score + 3;
+                                    }
+                                    break;
+                                case 1:
+                                    if (pieceAtLocation == piece || pieceAtLocation == piece + piece) {
+                                        score = score + 1;
+                                    }
+                                    break;
+                                case 2:
+                                    if (pieceAtLocation == piece || pieceAtLocation == piece + piece) {
+                                        score = score + 5;
+                                    }
+                                    break;
+                                case 3:
+                                    if (pieceAtLocation == piece || pieceAtLocation == piece + piece) {
+                                        score = score + 1;
+                                    }
+                                    break;
+                                case 4:
+                                    if (pieceAtLocation == piece || pieceAtLocation == piece + piece) {
+                                        score = score + 3;
+                                    }
+                                    break;
+                                default:
+                                    break;
+                            }
+                            break;
+                        case 7:
+                            switch (j) {
+                                case 0:
+                                    if (pieceAtLocation == piece || pieceAtLocation == piece + piece) {
+                                        score = score + 3;
+                                    }
+                                    break;
+                                case 1:
+                                    if (pieceAtLocation == piece || pieceAtLocation == piece + piece) {
+                                        score = score + 1;
+                                    }
+                                    break;
+                                case 2:
+                                    if (pieceAtLocation == piece || pieceAtLocation == piece + piece) {
+                                        score = score + 5;
+                                    }
+                                    break;
+                                case 3:
+                                    if (pieceAtLocation == piece || pieceAtLocation == piece + piece) {
+                                        score = score + 7;
+                                    }
+                                    break;
+                                case 4:
+                                    if (pieceAtLocation == piece || pieceAtLocation == piece + piece) {
+                                        score = score + 5;
+                                    }
+                                    break;
+                                case 5:
+                                    if (pieceAtLocation == piece || pieceAtLocation == piece + piece) {
+                                        score = score + 1;
+                                    }
+                                    break;
+                                case 6:
+                                    if (pieceAtLocation == piece || pieceAtLocation == piece + piece) {
+                                        score = score + 3;
+                                    }
+                                    break;
+                                default:
+                                    break;
+                            }
+                            break;
+                        case 9:
+                            switch (j) {
+                                case 0:
+                                    if (pieceAtLocation == piece || pieceAtLocation == piece + piece) {
+                                        score = score + 3;
+                                    }
+                                    break;
+                                case 1:
+                                    if (pieceAtLocation == piece || pieceAtLocation == piece + piece) {
+                                        score = score + 1;
+                                    }
+                                    break;
+                                case 2:
+                                    if (pieceAtLocation == piece || pieceAtLocation == piece + piece) {
+                                        score = score + 5;
+                                    }
+                                    break;
+                                case 3:
+                                    if (pieceAtLocation == piece || pieceAtLocation == piece + piece) {
+                                        score = score + 7;
+                                    }
+                                    break;
+                                case 4:
+                                    if (pieceAtLocation == piece || pieceAtLocation == piece + piece) {
+                                        score = score + 9;
+                                    }
+                                    break;
+                                case 5:
+                                    if (pieceAtLocation == piece || pieceAtLocation == piece + piece) {
+                                        score = score + 7;
+                                    }
+                                    break;
+                                case 6:
+                                    if (pieceAtLocation == piece || pieceAtLocation == piece + piece) {
+                                        score = score + 5;
+                                    }
+                                    break;
+                                case 7:
+                                    if (pieceAtLocation == piece || pieceAtLocation == piece + piece) {
+                                        score = score + 1;
+                                    }
+                                    break;
+                                case 8:
+                                    if (pieceAtLocation == piece || pieceAtLocation == piece + piece) {
+                                        score = score + 3;
+                                    }
+                                    break;
+                                default:
+                                    break;
+                            }
+                            break;
+                            
+                        default:
+                            break;
+                    }
+                } else if (i == tmp - 1) {
+                    //Second row
+                    if (j == 0 || j == tmp) {
+                        if (pieceAtLocation == piece || pieceAtLocation == piece + piece) {
+                            score = score + 1;
+                        }
+                    }
+                }
+            }
+        }
     }
+    
+    
+    //Get the amount of pieces the player captured.
+    if (piece == "B") {
+        //Get white pieces count
+        int whiteCount = getPieceCount("W");
+        int elimantedPieces = (getBoardSize() + 2) - whiteCount;
+        score = score + (elimantedPieces * 5);
+    } else {
+        int blackCount = getPieceCount("B");
+        int elimatedPieces = (getBoardSize() + 2)  - blackCount;
+        score = score + (elimatedPieces * 5);
+    }
+    
+    return score;
 }

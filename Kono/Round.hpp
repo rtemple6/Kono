@@ -41,7 +41,7 @@ public:
     void move();
     void swapTurns();
     
-    void endRound();
+    void endRound(bool didQuit, string quitter);
 };
 
 #endif /* Game_hpp */
