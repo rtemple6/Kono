@@ -154,28 +154,42 @@ bool Board:: movePiece(int row, int column, Direction d) {
     //E goes left, so subtract from column
     //W goes right, so add from to column
 
+    string piece = pieceAt(row, column);
     bool retVal = false;
     switch (d) {
         case NE:
-            board[row - 1][column + 1] = pieceAt(row, column);
+            if (piece.substr(0, 1) == "B" && row - 1 == 0) {
+                board[row - 1][column + 1] = "BB";
+            } else {
+                board[row - 1][column + 1] = piece;
+            }
             board[row][column] = 'O';
             retVal = true;
             break;
         case NW:
-            //Set the appropriate piece
-            board[row - 1][column - 1] = pieceAt(row, column);
+            if (piece.substr(0, 1) == "B" && row - 1 == 0) {
+                board[row - 1][column - 1] = "BB";
+            } else {
+                board[row - 1][column - 1] = piece;
+            }
             board[row][column] = 'O';
             retVal = true;
             break;
         case SE:
-            //Set the appropriate piece
-            board[row + 1][column + 1] = pieceAt(row, column);
+            if (piece.substr(0, 1) == "W" && row + 1 == getBoardSize()) {
+                board[row + 1][column + 1] = "WW";
+            } else {
+                board[row + 1][column + 1] = piece;
+            }
             board[row][column] = 'O';
             retVal = true;
             break;
         case SW:
-            //Set the appropriate piece
-            board[row + 1][column - 1] = pieceAt(row, column);
+            if (piece.substr(0, 1) == "W" && row + 1 == getBoardSize()) {
+                board[row + 1][column - 1] = "WW";
+            } else {
+                board[row + 1][column - 1] = piece;
+            }
             board[row][column] = 'O';
             retVal = true;
             break;

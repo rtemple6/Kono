@@ -19,11 +19,62 @@ void Computer::play() {
     } else if (areAnyBlockMoves()) {
         
     } else {
+        if (getColor() == "B") {
+            //get lowest row index piece and move it up.
+            for(int i = 0; i < getBoard()->getBoardSize();i++) {
+                for (int j = 0; j < getBoard()->getBoardSize();j++) {
+                    string piece = getBoard()->pieceAt(i, j);
+                    if (piece.substr(0, 1) == "B") {
+                        if(!isValidMove(i, j, NW, false)) {
+                            if(!isValidMove(i, j, NE, false)) {
+                                cout << "No advance moves." << endl;
+                            } else {
+                                getBoard()->movePiece(i, j, NE);
+                                getBoard()->drawBoard();
+                                cout << "Computer moved piece (" << i + 1 << ", " << j + 1 << ") northeast to advance towards your home points." << endl << endl;
+                                return;
+                            }
+                        } else {
+                            getBoard()->movePiece(i, j, NW);
+                            getBoard()->drawBoard();
+                            cout << "Computer moved piece (" << i + 1 << ", " << j + 1 << ") northwest to advance towards your home points." << endl << endl;
+                            return;
+                        }
+                    }
+                }
+            }
+        } else {
+            //get lowest row index piece and move it up.
+            int size = getBoard()->getBoardSize() - 1;
+            for(int i = size; i >= 0; i--) {
+                for (int j = 0; j < getBoard()->getBoardSize();j++) {
+                    string piece = getBoard()->pieceAt(i, j);
+                    if (piece.substr(0, 1) == "W") {
+                        if(!isValidMove(i, j, SE, false)) {
+                            if(!isValidMove(i, j, SW, false)) {
+                                cout << "No advance moves." << endl;
+                            } else {
+                                getBoard()->movePiece(i, j, SW);
+                                getBoard()->drawBoard();
+                                cout << "Computer moved piece (" << i + 1 << ", " << j + 1 << ") southwest to advance towards your home points." << endl << endl;
+                                return;
+                            }
+                        } else {
+                            getBoard()->movePiece(i, j, SE);
+                            getBoard()->drawBoard();
+                            cout << "Computer moved piece (" << i + 1 << ", " << j + 1 << ") southeast to advance towards your home points." << endl << endl;
+                            return;
+                        }
+                    }
+                }
+            }
+        }
+        
         //random piece in direction towards opponents home.
     }
 }
 
-bool Computer::isValidMove(int row, int column, Direction d) {
+bool Computer::isValidMove(int row, int column, Direction d, bool capture) {
     
     string selectedPiece = getBoard()->pieceAt(row, column);
     
@@ -35,12 +86,15 @@ bool Computer::isValidMove(int row, int column, Direction d) {
         case NW:
             row--;
             column--;
+            break;
         case SE:
             row++;
             column++;
+            break;
         case SW:
             row++;
             column--;
+            break;
         default:
             break;
     }
@@ -51,25 +105,28 @@ bool Computer::isValidMove(int row, int column, Direction d) {
         return false;
     }
     
-    //Check to see if there is a piece there.
     string piece = getBoard()->pieceAt(row, column);
     
     string computerPiece = getColor();
     string userPiece = (computerPiece == "B") ? "W" : "B";
     
     if (userPiece == piece) {
-        if (selectedPiece == userPiece + userPiece){
+        if (selectedPiece == computerPiece + computerPiece){
             return true;
         }
         return false;
     } else if (computerPiece == piece) {
         return false;
     } else {
+        if (capture){
+            return false;
+        }
         return true;
     }
     
     return false;
 }
+
 
 bool Computer::areAnySuperPieceMoves() {
     //Find each super piece
@@ -99,11 +156,11 @@ bool Computer::areAnySuperPieceMoves() {
                         direction = SW;
                         directionWord = "southwest";
                     }
-                    if (isValidMove(i, j, direction)) {
+                    if (isValidMove(i, j, direction, true)) {
                         cout << endl;
                         getBoard()->movePiece(i, j, direction);
                         getBoard()->drawBoard();
-                        cout << "The computer moved piece at (" << i << ", " << j << ") " << directionWord << " to capture your piece." << endl << endl;
+                        cout << "The computer moved piece at (" << i + 1 << ", " << j + 1 << ") " << directionWord << " to capture your piece." << endl << endl;
                         return true;
                     }
                 }
@@ -141,18 +198,15 @@ bool Computer::areAnyBlockMoves() {
                         direction = SW;
                         directionWord = "southwest";
                     }
-                    cout << "Before is valid: (Row, Column) " << i << ", " << j << endl;
-                    if (isValidMove(i, j, direction)) {
+                    if (isValidMove(i, j, direction, false)) {
                         //Check directions
                         //If opponent piece occupies one spot
                         //Move and say your blocking
-                        cout << "Direction word: " << directionWord << endl;
                         if (doesHumanOccupyNeighborSpots(i, j, direction)) {
                             return true;
                         }
-                        cout << endl;
                     } else {
-                        cout << "Invalid direction: " << directionWord << endl;
+                        //Invalid direction, do nothing
                     }
                 }
             }
@@ -165,8 +219,6 @@ bool Computer::doesHumanOccupyNeighborSpots(int row, int column, Direction d) {
     string directionWord;
     int originalRow = row;
     int originalColumn = column;
-    
-    cout << "Does occupy: Row/Column/Direction " << row << ", " << column << ", " << d << endl;
     
     //Move piece to new tmp location
     switch (d) {
@@ -199,8 +251,6 @@ bool Computer::doesHumanOccupyNeighborSpots(int row, int column, Direction d) {
     
     int innerRow = newRow;
     int innerColumn = newColumn;
-    
-    cout << "New (Row, Column): " << row << ", " << column << endl;
     
     Direction direction;
     
@@ -236,18 +286,13 @@ bool Computer::doesHumanOccupyNeighborSpots(int row, int column, Direction d) {
                 break;
         }
         
-        cout << endl;
-        cout << "New Row: " << innerRow << endl;
-        cout << "New Colum: " << innerRow << endl;
-        cout << "Direction: " << direction << endl;
         
         //Check to see if it is out of the bounds.
-        if (innerRow >= getBoard()->getBoardSize() || innerRow < 0 || innerColumn >= getBoard()->getBoardSize() || innerColumn < 0) {
-            cout << "Out of bounds" << endl;
+        if (innerRow >= getBoard()->getBoardSize() - 1 || innerRow <= 0 || innerColumn >= getBoard()->getBoardSize() - 1 || innerColumn <= 0) {
+            //Out of bounds
         } else {
             
             string piece = getBoard()->pieceAt(innerRow, innerColumn);
-            cout << "Le piece: " << piece << endl;
             string opponentPiece;
             (getColor() == "B") ? opponentPiece = "W" : opponentPiece = "B";
             if (piece == opponentPiece) {
@@ -256,7 +301,7 @@ bool Computer::doesHumanOccupyNeighborSpots(int row, int column, Direction d) {
                 getBoard()->movePiece(originalRow, originalColumn, direction);
                 getBoard()->drawBoard();
                 cout << "The computer moved the piece at (" << originalRow + 1 << ", " << originalColumn + 1 << ") " << directionWord << "." << endl;
-                cout << "It wanted to block your piece at (" << innerRow + 1 << ", " << innerColumn + 1 << ")." << endl;
+                cout << "It wanted to block your piece at (" << innerRow + 1 << ", " << innerColumn + 1 << ")." << endl << endl;
                 return true;
             } else {
                 //There is no piece to block

@@ -53,8 +53,8 @@ void Human::play() {
         
         string color = getColor();
         string userPiece = getBoard()->pieceAt(row, column);
-        userPiece.substr(0, 1);
-        if (color != userPiece) {
+        string piece = userPiece.substr(0, 1);
+        if (color != piece) {
             validInputs = false;
             cout << endl << "Invalid Move: Must select your piece (" << color << ")." << endl;
         } else {
