@@ -53,6 +53,7 @@ void Human::play() {
         
         string color = getColor();
         string userPiece = getBoard()->pieceAt(row, column);
+        userPiece.substr(0, 1);
         if (color != userPiece) {
             validInputs = false;
             cout << endl << "Invalid Move: Must select your piece (" << color << ")." << endl;
@@ -85,6 +86,8 @@ void Human::play() {
 
 bool Human::isValidMove(int row, int column, Direction d) {
     
+    string selectedPiece = getBoard()->pieceAt(row, column);
+    
     switch (d) {
         case NE:
             row--;
@@ -93,12 +96,15 @@ bool Human::isValidMove(int row, int column, Direction d) {
         case NW:
             row--;
             column--;
+            break;
         case SE:
             row++;
-            column--;
+            column++;
+            break;
         case SW:
             row++;
-            column++;
+            column--;
+            break;
         default:
             break;
     }
@@ -111,12 +117,16 @@ bool Human::isValidMove(int row, int column, Direction d) {
 
     //Check to see if there is a piece there.
     string piece = getBoard()->pieceAt(row, column);
+    
     string userPiece = getColor();
     string computerPiece = (userPiece == "B") ? "W" : "B";
     
     if (computerPiece == piece) {
-        cout << endl << "Computer piece occupies this space." << endl;
-        cout << "This is where capture functionality should go" << endl;
+        if (selectedPiece == userPiece + userPiece){
+            return true;
+        } else {
+            cout << "This piece must be a 'super-piece' to capture an opponent." << endl;
+        }
         return false;
     } else if (userPiece == piece) {
         cout << endl << "Your piece occupies this space." << endl;

@@ -157,31 +157,23 @@ bool Board:: movePiece(int row, int column, Direction d) {
     bool retVal = false;
     switch (d) {
         case NE:
-            cout << "Moving piece at row: " << row << " column: " << column;
-            cout << " to row: " << row - 1 << " column: " << column + 1 << endl;
             board[row - 1][column + 1] = pieceAt(row, column);
             board[row][column] = 'O';
             retVal = true;
             break;
         case NW:
-            cout << "Moving piece at row: " << row << " column: " << column;
-            cout << " to row: " << row - 1 << " column: " << column - 1 << endl;
             //Set the appropriate piece
             board[row - 1][column - 1] = pieceAt(row, column);
             board[row][column] = 'O';
             retVal = true;
             break;
         case SE:
-            cout << "Moving piece at row: " << row << " column: " << column;
-            cout << " to row: " << row + 1 << " column: " << column + 1 << endl;
             //Set the appropriate piece
             board[row + 1][column + 1] = pieceAt(row, column);
             board[row][column] = 'O';
             retVal = true;
             break;
         case SW:
-            cout << "Moving piece at row: " << row << " column: " << column;
-            cout << " to row: " << row + 1 << " column: " << column - 1 << endl;
             //Set the appropriate piece
             board[row + 1][column - 1] = pieceAt(row, column);
             board[row][column] = 'O';

@@ -17,6 +17,12 @@ class Computer: public Player {
 public:
     Computer();
     void play();
+    bool isValidMove(int row, int column, Direction d);
+    
+    bool areAnySuperPieceMoves();
+    bool areAnyBlockMoves();
+    
+    bool doesHumanOccupyNeighborSpots(int row, int column, Direction d);
 };
 
 #endif /* Computer_hpp */
