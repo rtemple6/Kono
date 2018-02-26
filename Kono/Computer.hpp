@@ -16,7 +16,13 @@ using namespace std;
 class Computer: public Player {
 public:
     Computer();
-    tuple<int, int, Direction> play();
+    void play();
+    bool isValidMove(int row, int column, Direction d, bool capture);
+    
+    bool areAnySuperPieceMoves();
+    bool areAnyBlockMoves();
+    
+    bool doesHumanOccupyNeighborSpots(int row, int column, Direction d);
 };
 
 #endif /* Computer_hpp */

@@ -14,22 +14,30 @@
 #include <iostream>
 #include <tuple>
 #include <sstream>
-#include "Direction.cpp"
+#include "Board.hpp"
 using namespace std;
 
 
 class Player {
     bool isTurn = false;
-    char color;
+    string color;
+    int score = 0;
+    Board *board;
 public:
     Player();
     void setTurn(bool turn);
     bool getIsTurn();
     
-    void setColor(char color);
-    char getColor();
+    void setBoard(Board *b);
+    Board* getBoard();
     
-    virtual tuple<int, int, Direction> play();    
+    void setScore(int score);
+    int getScore();
+    
+    void setColor(string color);
+    string getColor();
+    
+    virtual void play();
 };
 
 #endif /* Player_hpp */

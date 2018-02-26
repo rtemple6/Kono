@@ -12,20 +12,20 @@
 #include "Human.hpp"
 #include "Computer.hpp"
 #include <stdio.h>
-#include "Game.hpp"
+#include "Round.hpp"
 #include <tuple>
+#include "FileReader.hpp"
 using namespace std;
 
 class Tournament {
     Human *user;
     Computer *computer;
-    Game * game;
-    int roundNumber = 0;
+    Round * game;
+    FileReader f;
 public:
     Tournament();
     void startGame();
-    void resumeGame();
-    void setRound(int round);
+    bool resumeGame(string filename);
 };
 
 #endif /* Tournament_hpp */

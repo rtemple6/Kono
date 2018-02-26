@@ -21,8 +21,12 @@ class FileReader {
     
     void openFile();
     void closeFile();
+    
+    string ** createBoard(int size, string data[]);
 public:
     FileReader();
+    
+    string validateFile();
     
     void setFileName(string name);
     
@@ -35,6 +39,8 @@ public:
     
     int getPlayerScore();
     string getPlayerColor();
+    
+    tuple<int, string**> getBoard();
 };
 
 #endif /* FileReader_hpp */

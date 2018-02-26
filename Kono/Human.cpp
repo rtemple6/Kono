@@ -13,56 +13,129 @@ Human:: Human() {
     
 }
 
-
-tuple<int, int, Direction> Human::play() {
-    int row, column;
-    cout << endl << "Move Piece - Valid Directions (NE/NW/SE/SW)" << endl;
-    cout << "      Row: ";
-    cin >> row;
-    cout << "   Column: ";
-    cin >> column;
+void Human::play() {
     
-    //Found this line of code here https://www.daniweb.com/programming/software-development/tutorials/71858/user-input-strings-and-numbers-c
-    //Allows for the string input after the 2 integer inputs
+    bool correctPiece = false;
+    bool validInputs = false;
+    int row, column;
+    while (!correctPiece) {
+        cout << endl << "Move Piece" << endl;
+        
+        while (!validInputs) {
+            cout << "   Row: ";
+            cin >> row;
+            while(cin.fail()) {
+                cout << "   Row: ";
+                cin.clear();
+                cin.ignore(256,'\n');
+                cin >> row;
+            }
+            if (row > 0 && row <= getBoard()->getBoardSize()) {
+                while (!validInputs) {
+                    cout << "Column: ";
+                    cin >> column;
+                    while(cin.fail()) {
+                        cout << "Column: ";
+                        cin.clear();
+                        cin.ignore(256,'\n');
+                        cin >> column;
+                    }
+                    if (column > 0 && column <= getBoard()->getBoardSize()) {
+                        //Normalize values
+                        row--;
+                        column--;
+                        
+                        validInputs = true;
+                    }
+                }
+            }
+        }
+        
+        string color = getColor();
+        string userPiece = getBoard()->pieceAt(row, column);
+        string piece = userPiece.substr(0, 1);
+        if (color != piece) {
+            validInputs = false;
+            cout << endl << "Invalid Move: Must select your piece (" << color << ")." << endl;
+        } else {
+            correctPiece = true;
+        }
+    }
+    
     cin.ignore(numeric_limits<streamsize>::max(), '\n');
     
     bool isValid = false;
     Direction d;
     while (!isValid) {
-        cout << "Direction: ";
+        cout << "Direction (NW/NE/SW/SE): ";
         string direction;
         getline (cin, direction);
         
-        tie(isValid, d) = validateDirection(direction);
+        tie(isValid, d) = getBoard()->validateDirection(direction);
     }
     
-    //Subtract 1 to fix array position starting at 0
-    return make_tuple(row - 1, column - 1, d);
-}
-
-
-tuple<bool, Direction> Human:: validateDirection(string direction){
-    
-    if (direction.empty()) {
-        return make_tuple(false, NE);
-    }
-    
-    Direction d;
-    
-    //Make it uppercase
-    transform(direction.begin(), direction.end(), direction.begin(), ::toupper);
-    
-    if (direction == "NE") {
-        d = NE;
-    } else if (direction == "NW") {
-        d = NW;
-    } else if (direction == "SE") {
-        d = SE;
-    } else if (direction == "SW") {
-        d = SW;
+    if (isValidMove(row, column, d)) {
+        getBoard()->movePiece(row, column, d);
+        getBoard()->drawBoard();
     } else {
-        return make_tuple(false, NE);
+        play();
+    }
+   
+    
+}
+
+bool Human::isValidMove(int row, int column, Direction d) {
+    
+    string selectedPiece = getBoard()->pieceAt(row, column);
+    
+    switch (d) {
+        case NE:
+            row--;
+            column++;
+            break;
+        case NW:
+            row--;
+            column--;
+            break;
+        case SE:
+            row++;
+            column++;
+            break;
+        case SW:
+            row++;
+            column--;
+            break;
+        default:
+            break;
+    }
+
+    //Check to see if it is out of the bounds.
+    if (row >= getBoard()->getBoardSize() || row < 0 || column >= getBoard()->getBoardSize() || column < 0) {
+        cout << endl << "Invalid Move: Must stay on the board." << endl;
+        return false;
+    }
+
+    //Check to see if there is a piece there.
+    string piece = getBoard()->pieceAt(row, column);
+    
+    string userPiece = getColor();
+    string computerPiece = (userPiece == "B") ? "W" : "B";
+    
+    if (computerPiece == piece) {
+        if (selectedPiece == userPiece + userPiece){
+            return true;
+        } else {
+            cout << "This piece must be a 'super-piece' to capture an opponent." << endl;
+        }
+        return false;
+    } else if (userPiece == piece) {
+        cout << endl << "Your piece occupies this space." << endl;
+        return false;
+    } else {
+        return true;
     }
     
-    return make_tuple(true, d);
+    return false;
 }
+
+

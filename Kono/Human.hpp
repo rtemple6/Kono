@@ -17,11 +17,10 @@ using namespace std;
 
 
 class Human: public Player {
-    //Helper method
-    tuple<bool, Direction> validateDirection(string direction);
 public:
     Human();
-    tuple<int, int, Direction> play();
+    void play();
+    bool isValidMove(int row, int column, Direction d);
 };
 
 #endif /* Human_hpp */

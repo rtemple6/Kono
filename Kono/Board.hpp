@@ -10,32 +10,42 @@
 #define Board_hpp
 
 #include <stdio.h>
-#include "Human.hpp"
-#include "Computer.hpp"
-
+#include <iostream>
+#include "Direction.cpp"
+#include <tuple>
+using namespace std;
 
 class Board {
     int boardSize;
     //2 Dimensional array to hold board
-    char ** board;
-    Human *user;
-    Computer *computer;
-    bool isValidMove(int row, int column);
+    string ** board;
     bool isPieceAtLocation(int row, int column);
     
+    int getPieceCount(string color);
+    int getPiecesScoredCount(string color);
+    
+    string winnerPiece = "B";
 public:
     Board();
     void createBoard(int size);
+    void setBoard(int size, string **data);
+    string** getBoard();
     int getBoardSize();
     
-    void set(Human *user, Computer *computer);
-    
-    char pieceAt(int row, int column);
+    string pieceAt(int row, int column);
     
     //Draws the current board
     void drawBoard();
         
     bool movePiece(int row, int column, Direction d);
+    tuple<bool, Direction> validateDirection(string direction);
+    
+    bool checkForWinner();
+    
+    void setWinnerPiece(string piece);
+    string getWinnerPiece();
+    
+    int getScore(string piece);
 };
 
 #endif /* Board_hpp */
