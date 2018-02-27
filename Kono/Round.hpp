@@ -14,6 +14,7 @@
 #include "Human.hpp"
 #include "Computer.hpp"
 #include "FileWriter.hpp"
+#include "FileReader.hpp"
 #include <sstream>
 
 class Round {
@@ -32,7 +33,7 @@ public:
     void setUpBoard();
     void loadBoard(int size, string **data);
     
-    void rollDice();
+    void rollDice(bool fromConfig);
     void chooseColor();
 
     void provideMenu();

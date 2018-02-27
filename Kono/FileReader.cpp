@@ -58,9 +58,56 @@ string FileReader::validateFile() {
     return filename;
 }
 
-//Will return false if can not open file
 void FileReader::setFileName(string name) {
     filename = name;
+}
+
+string FileReader::loadDice() {
+    
+    string returnWinner = "Human";
+    openFile();
+    
+    int diceRolls[100];
+    //Count of the array
+    int count = 0;
+    int dice;
+    for (int i = 0; !stream.eof(); i++) {
+        stream >> dice;
+        diceRolls[i] = dice;
+        count++;
+    }
+    
+    bool foundWinner = false;
+    int index = 0;
+    int userRoll, computerRoll;
+    while (!foundWinner) {
+        //Get user roll
+        if (index < count && index + 1 < count) {
+            userRoll = diceRolls[index] + diceRolls[index + 1];
+        } else {
+            cout << "Error reading dice: assigning random numbers." << endl;
+            return returnWinner;
+        }
+        
+        //Get computer roll
+        if (index + 2 < count && index + 3 < count) {
+            computerRoll = diceRolls[index + 2] + diceRolls[index + 3];
+        } else {
+            cout << "Error reading dice: assigning random numbers." << endl;
+            return returnWinner;
+        }
+        
+        if (userRoll == computerRoll) {
+            index += 4;
+        } else {
+            cout << "User loaded dice: " << userRoll << endl;
+            cout << "Computer loaded dice: " << computerRoll << endl;
+            (userRoll > computerRoll) ? returnWinner = "Human" : returnWinner = "Computer";
+            foundWinner = true;
+        }
+    }
+    closeFile();
+    return returnWinner;
 }
 
 int FileReader::getRound() {

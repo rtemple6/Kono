@@ -59,26 +59,32 @@ void Round:: loadBoard(int size, string **data) {
     this->board->drawBoard();
 }
 
-void Round::rollDice() {
+void Round::rollDice(bool fromConfig) {
     cout << endl << "Round " << getRound() << endl << endl;
-    
-    int player1Score = 11;//rand() % 10 + 2;
-    int player2Score = 9;//rand() % 10 + 2;
-    
-    cout << "* Rolling dice to see who goes first *" << endl << endl;
-    cout << "You Rolled: " << player1Score << endl;
-    cout << "Computer Rolled: " << player2Score << endl;
-    
-    //If they are same value, recursively call determine order.
-    if (player1Score == player2Score) {
-        cout << "You tied." << endl;
-        rollDice();
-        return;
+    srand(time(0));
+    FileReader r;
+    if (fromConfig) {
+        r.setFileName("Dice.txt");
+        string winner = r.loadDice();
+        (winner == "Human") ? user->setTurn(true) : computer->setTurn(true);
+    } else {
+        int player1Score = rand() % 12 + 1;
+        int player2Score = rand() % 12 + 1;
+        
+        cout << "* Rolling dice to see who goes first *" << endl << endl;
+        cout << "You Rolled: " << player1Score << endl;
+        cout << "Computer Rolled: " << player2Score << endl;
+        
+        //If they are same value, recursively call determine order.
+        if (player1Score == player2Score) {
+            cout << "You tied." << endl;
+            rollDice(fromConfig);
+            return;
+        }
+        
+        //Determine highest score.
+        (player1Score > player2Score) ? user->setTurn(true) : computer->setTurn(true);
     }
-    
-    //Determine highest score.
-    (player1Score > player2Score) ? user->setTurn(true) : computer->setTurn(true);
-    
     (user->getIsTurn()) ? cout << "You will go first!" << endl << endl : cout << "Computer will go first." << endl << endl;
     chooseColor();
 }

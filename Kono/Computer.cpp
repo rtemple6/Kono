@@ -71,6 +71,7 @@ void Computer::play() {
         }
         
         //random piece in direction towards opponents home.
+        
     }
 }
 

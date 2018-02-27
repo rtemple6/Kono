@@ -34,7 +34,23 @@ void Tournament::startGame() {
             
         } else if (resume == 'N' || resume == 'n') {
             validChar = true;
-            game->rollDice();
+            
+            char loadDice;
+            bool validDice = false;
+            
+            while (!validDice) {
+                cout << "Load dice from config file (Dice.txt) (Y / N): ";
+                cin >> loadDice;
+                
+                if (loadDice == 'Y' || loadDice == 'y') {
+                    validChar = true;
+                    game->rollDice(true);
+                } else if (loadDice == 'N' || loadDice == 'n') {
+                    validChar = false;
+                    game->rollDice(false);
+                }
+            }
+            
             game->setUpBoard();
             game->provideMenu();
         }

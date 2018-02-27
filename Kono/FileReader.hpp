@@ -30,6 +30,8 @@ public:
     
     void setFileName(string name);
     
+    string loadDice();
+    
     int getRound();
     
     string getNextPlayer();

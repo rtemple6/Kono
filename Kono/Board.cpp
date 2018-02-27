@@ -176,7 +176,7 @@ bool Board:: movePiece(int row, int column, Direction d) {
             retVal = true;
             break;
         case SE:
-            if (piece.substr(0, 1) == "W" && row + 1 == getBoardSize()) {
+            if (piece.substr(0, 1) == "W" && row + 1 == getBoardSize() - 1) {
                 board[row + 1][column + 1] = "WW";
             } else {
                 board[row + 1][column + 1] = piece;
@@ -185,7 +185,7 @@ bool Board:: movePiece(int row, int column, Direction d) {
             retVal = true;
             break;
         case SW:
-            if (piece.substr(0, 1) == "W" && row + 1 == getBoardSize()) {
+            if (piece.substr(0, 1) == "W" && row + 1 == getBoardSize() - 1) {
                 board[row + 1][column - 1] = "WW";
             } else {
                 board[row + 1][column - 1] = piece;
