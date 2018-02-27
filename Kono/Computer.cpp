@@ -42,7 +42,7 @@ tuple<int, int, Direction,MoveType> Computer::play() {
             cout << "Computer is capturing your piece. " << endl;
             break;
         case block:
-            cout << "Computer is blocking your piece. " << endl;
+            cout << endl << "Computer moved piece at (" << row + 1 << ", " << column + 1 << ") " << directionWord << " to block your piece." << endl  << endl;
             break;
         case MoveType::advance:
             cout << endl << "Computer moved piece at (" << row + 1 << ", " << column + 1 << ") " << directionWord << " to advance towards your home field." << endl  << endl;

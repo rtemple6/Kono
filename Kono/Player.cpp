@@ -233,9 +233,12 @@ tuple<int, int, Direction, bool> Player::areAnyBlockMoves() {
                     }
                     //See if its valid
                     if (isValidMove(i, j, direction, false)) {
+                        
                         //See if neighbor is human
                         bool doesOccupy;
-                        tie(i, j, direction, doesOccupy) = doesHumanOccupyNeighborSpots(i, j, direction);
+                        int r, c;
+                        Direction dd;
+                        tie(r, c, dd, doesOccupy) = doesHumanOccupyNeighborSpots(i, j, direction);
                         if (doesOccupy) {
                         return make_tuple(i, j, direction, doesOccupy);
                         }
@@ -325,23 +328,12 @@ tuple<int, int, Direction, bool> Player::doesHumanOccupyNeighborSpots(int row, i
         
         //Check to see if it is out of the bounds.
         if (innerRow >= getBoard()->getBoardSize() - 1 || innerRow <= 0 || innerColumn >= getBoard()->getBoardSize() - 1 || innerColumn <= 0) {
-//
-//            cout << "Inner row: " << innerRow << " <= " << getBoard()->getBoardSize() - 1 << endl;
-//            cout << "Inner row: " << innerRow << " >= " << 0 << endl;
-//
-//            cout << "Inner column: " << innerColumn << " <= " << getBoard()->getBoardSize() - 1 << endl;
-//            cout << "Inner column: " << innerColumn << " >= " << 0 << endl;
-//
-//            cout << endl;
         } else {
             
-            cout << endl;
             string piece = getBoard()->pieceAt(innerRow, innerColumn);
-            cout << "Piece at: "<< piece << endl;
             string opponentPiece;
             
             (getColor() == "B") ? opponentPiece = "W" : opponentPiece = "B";
-            cout << "Opponent piece: "<< opponentPiece << endl;
             if (piece == opponentPiece) {
                 //It will block this piece
 //                cout << endl;
@@ -352,7 +344,6 @@ tuple<int, int, Direction, bool> Player::doesHumanOccupyNeighborSpots(int row, i
                 return make_tuple(originalRow, originalColumn, direction, true);
             } else {
                 //There is no piece to block
-                cout << "No piece. " << endl;
             }
         }
     }
