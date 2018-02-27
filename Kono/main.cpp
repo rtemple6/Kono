@@ -9,6 +9,18 @@
 #include <iostream>
 #include "Tournament.hpp"
 
+
+/* *********************************************************************
+ Function Name: main
+ Purpose: The main funciton to start
+ Parameters:
+ none
+ Return Value: none
+ Local Variables:
+ t, the tournament
+ Algorithm: none
+ Assistance Received: none
+ ********************************************************************* */
 int main(int argc, const char * argv[]) {
     Tournament t;
     t.startGame();

@@ -25,7 +25,7 @@ class Tournament {
 public:
     Tournament();
     void startGame();
-    bool resumeGame(string filename);
+    void resumeGame(string filename);
 };
 
 #endif /* Tournament_hpp */
