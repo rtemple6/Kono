@@ -9,11 +9,11 @@
 #include "Human.hpp"
 
 
-Human:: Human() {
-    
+Human:: Human(string color): Player(color) {
+    setColor(color);
 }
 
-void Human::play() {
+tuple<int, int, Direction, MoveType> Human::play() {
     
     bool correctPiece = false;
     bool validInputs = false;
@@ -75,13 +75,11 @@ void Human::play() {
     }
     
     if (isValidMove(row, column, d)) {
-        getBoard()->movePiece(row, column, d);
-        getBoard()->drawBoard();
+        return make_tuple(row, column, d, block);
     } else {
         play();
     }
-   
-    
+    return make_tuple(1, 1, SE, block);
 }
 
 bool Human::isValidMove(int row, int column, Direction d) {

@@ -18,8 +18,8 @@ using namespace std;
 
 class Human: public Player {
 public:
-    Human();
-    void play();
+    Human(string color);
+    tuple<int, int, Direction, MoveType> play();
     bool isValidMove(int row, int column, Direction d);
 };
 

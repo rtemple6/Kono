@@ -14,9 +14,12 @@
 
 using namespace std;
 
-Round::Round(Human * u, Computer * c) {
+Round::Round() {
     this->board = new Board();
-    this->user = u;
+}
+
+void Round::setPlayers(Human *h, Computer *c) {
+    this->user = h;
     this->computer = c;
 }
 
@@ -59,6 +62,19 @@ void Round:: loadBoard(int size, string **data) {
     this->board->drawBoard();
 }
 
+void Round::nextRound(string winner) {
+    if (winner == "Human") {
+        user->setTurn(true);
+        computer->setTurn(false);
+    } else {
+        cout << endl << "Computer won the previous round so he chooses color." << endl;
+        computer->setTurn(true);
+        user->setTurn(false);
+    }
+    
+    chooseColor();
+}
+
 void Round::rollDice(bool fromConfig) {
     cout << endl << "Round " << getRound() << endl << endl;
     srand(time(0));
@@ -66,7 +82,14 @@ void Round::rollDice(bool fromConfig) {
     if (fromConfig) {
         r.setFileName("Dice.txt");
         string winner = r.loadDice();
-        (winner == "Human") ? user->setTurn(true) : computer->setTurn(true);
+        
+        if (winner == "Human") {
+            cout << "You will go first!" << endl;
+            chooseColor();
+        } else {
+            cout << "Computer will go first and choose color." << endl;
+            computerChooseColor();
+        }
     } else {
         int player1Score = rand() % 12 + 1;
         int player2Score = rand() % 12 + 1;
@@ -83,59 +106,65 @@ void Round::rollDice(bool fromConfig) {
         }
         
         //Determine highest score.
-        (player1Score > player2Score) ? user->setTurn(true) : computer->setTurn(true);
+        if (player1Score > player2Score) {
+            cout << "You will go first!" << endl;
+            chooseColor();
+        } else {
+            cout << "Computer will go first and choose color." << endl;
+            computerChooseColor();
+        }
     }
-    (user->getIsTurn()) ? cout << "You will go first!" << endl << endl : cout << "Computer will go first." << endl << endl;
-    chooseColor();
-}
-
-void Round::nextRound(string winner) {
-    if (winner == "Human") {
-        user->setTurn(true);
-        computer->setTurn(false);
-    } else {
-        cout << endl << "Computer won the previous round so he chooses color." << endl;
-        computer->setTurn(true);
-        user->setTurn(false);
-    }
-    
-    chooseColor();
 }
 
 void Round::chooseColor() {
     //Print who goes first
     stringstream ss;
     cout << endl;
-    if (user->getIsTurn()) {
-        cout << "Choose your color (B or W): ";
-        char color, upperColor;
-        cin >> color;
-        
-        upperColor = toupper(color);
-        if (upperColor != 'B') {
-            if (upperColor != 'W') {
-                chooseColor();
-                return;
-            }
+    
+    cout << "Choose your color (B or W): ";
+    char color, upperColor;
+    cin >> color;
+    
+    upperColor = toupper(color);
+    if (upperColor != 'B') {
+        if (upperColor != 'W') {
+            chooseColor();
+            return;
         }
-        
-        //Was using Chars initially, switched to Strings.
-        //This converts my char to a string
-        ss << upperColor;
-        string tmpColor;
-        ss >> tmpColor;
-        
-        user->setColor(tmpColor);
-        (upperColor == 'B') ? computer->setColor("W") : computer->setColor("B");
-    } else {
-        computer->setColor("W");
-        user->setColor("B");
     }
+    
+    //Was using Chars initially, switched to Strings.
+    //This converts my char to a string
+    ss << upperColor;
+    string tmpColor;
+    ss >> tmpColor;
+    
+    string colorToSet, computerColor;
+    if (upperColor == 'B') {
+        colorToSet = "B";
+        computerColor = "W";
+    } else {
+        colorToSet = "W";
+        computerColor = "B";
+    }
+    
+    user = new Human(colorToSet);
+    computer = new Computer(computerColor);
+    
+    setPlayers(user,computer);
+    user->setTurn(true);
     
     cout << "You are " << user->getColor() << "." << endl;
     cout << "Computer is " << computer->getColor() << "." << endl << endl;
 }
 
+void Round::computerChooseColor() {
+    user = new Human("B");
+    computer = new Computer("W");
+    
+    setPlayers(user,computer);
+    computer->setTurn(true);
+}
 
 void Round::provideMenu() {
     //
@@ -172,6 +201,7 @@ void Round::provideMenu() {
     
     FileWriter write;
     string nextPlayer;
+    string directionWord;
     switch (choice) {
         case 1:
             (user->getIsTurn()) ? nextPlayer = "Human" : nextPlayer = "Computer";
@@ -181,7 +211,45 @@ void Round::provideMenu() {
             move();
             break;
         case 3:
-            cout << "Suggesting move..." << endl;
+            int row, column;
+            Direction d;
+            MoveType m;
+            
+            tie(row, column, d, m) = user->Player::play();
+            row++;
+            column++;
+            
+            switch (d) {
+                case NE:
+                    directionWord = "northeast";
+                    break;
+                case NW:
+                    directionWord = "northwest";
+                    break;
+                case SE:
+                    directionWord = "southeast";
+                    break;
+                case SW:
+                    directionWord = "southwest";
+                    break;
+                default:
+                    break;
+            }
+            
+            switch (m) {
+                case capture:
+                    cout << "Move piece at (" << row << ", " << column << ") " << directionWord << " to capture opponents piece." << endl;
+                    break;
+                case block:
+                    cout << "Move piece at (" << row << ", " << column << ") " << directionWord << " to block opponents piece." << endl;
+                    break;
+                case MoveType::advance:
+                    cout << "Move piece at (" << row << ", " << column << ") " << directionWord << " to advance to computers home pieces." << endl;
+                    break;
+                default:
+                    break;
+            }
+            move();
             break;
         case 4:
             endRound(true, "Human");
@@ -238,11 +306,16 @@ void Round:: computerMenu() {
 }
 
 void Round:: move() {
+    int row, column;
+    Direction d;
+    MoveType doesntMatterIgnoreThisSorry;
     if (user->getIsTurn()) {
-        user->play();
+        tie(row, column, d, doesntMatterIgnoreThisSorry) = user->play();
     } else {
-        computer->play();
+        tie(row, column, d, doesntMatterIgnoreThisSorry) = computer->play();
     }
+    board->movePiece(row, column, d);
+    board->drawBoard();
     
     if (board->checkForWinner()) {
         if (user->getColor() == board->getWinnerPiece()) {

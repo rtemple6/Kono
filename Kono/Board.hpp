@@ -12,6 +12,7 @@
 #include <stdio.h>
 #include <iostream>
 #include "Direction.cpp"
+#include "MoveType.cpp"
 #include <tuple>
 using namespace std;
 

@@ -15,16 +15,20 @@
 #include <tuple>
 #include <sstream>
 #include "Board.hpp"
+
 using namespace std;
 
 
 class Player {
-    bool isTurn = false;
+protected:
     string color;
+    Player(string color);
+private:
+    bool isTurn = false;
     int score = 0;
     Board *board;
 public:
-    Player();
+    
     void setTurn(bool turn);
     bool getIsTurn();
     
@@ -37,7 +41,13 @@ public:
     void setColor(string color);
     string getColor();
     
-    virtual void play();
+    virtual tuple<int, int, Direction, MoveType> play();
+    bool isValidMove(int row, int column, Direction d, bool capture);
+    
+    tuple<int, int, Direction, bool> areAnySuperPieceMoves();
+    tuple<int, int, Direction, bool> areAnyBlockMoves();
+    
+    tuple<int, int, Direction, bool> doesHumanOccupyNeighborSpots(int row, int column, Direction d);
 };
 
 #endif /* Player_hpp */

@@ -12,9 +12,7 @@
 using namespace std;
 
 Tournament::Tournament() {
-    this->user = new Human();
-    this->computer = new Computer();
-    this->game = new Round(user, computer);
+    this->game = new Round();
 }
 
 void Tournament::startGame() {
@@ -43,10 +41,10 @@ void Tournament::startGame() {
                 cin >> loadDice;
                 
                 if (loadDice == 'Y' || loadDice == 'y') {
-                    validChar = true;
+                    validDice = true;
                     game->rollDice(true);
                 } else if (loadDice == 'N' || loadDice == 'n') {
-                    validChar = false;
+                    validDice = true;
                     game->rollDice(false);
                 }
             }
@@ -63,6 +61,14 @@ bool Tournament::resumeGame(string filename) {
     int round = f.getRound();
     cout << "Round: " << round << endl << endl;
     
+    string playerColor = f.getPlayerColor();
+    string computerColor = f.getComputerColor();
+    
+    user = new Human(playerColor);
+    computer = new Computer(computerColor);
+    
+    game->setPlayers(user, computer);
+    
     string nextPlayer = f.getNextPlayer();
     if (nextPlayer == "Human") {
         user->setTurn(true);
@@ -75,14 +81,12 @@ bool Tournament::resumeGame(string filename) {
     int computerScore = f.getComputerScore();
     computer->setScore(computerScore);
     
-    string computerColor = f.getComputerColor();
-    computer->setColor(computerColor);
+    
     
     int playerScore = f.getPlayerScore();
     user->setScore(playerScore);
     
-    string playerColor = f.getPlayerColor();
-    user->setColor(playerColor);
+   
     
     int count;
     string ** boardData;

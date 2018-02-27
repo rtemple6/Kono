@@ -23,7 +23,9 @@ class Round {
     Computer *computer;
     int round = 1;
 public:
-    Round(Human * u, Computer * c);
+    Round();
+    
+    void setPlayers(Human*h, Computer*c);
     
     void setRound(int round);
     int getRound();
@@ -35,6 +37,7 @@ public:
     
     void rollDice(bool fromConfig);
     void chooseColor();
+    void computerChooseColor();
 
     void provideMenu();
     void computerMenu();
