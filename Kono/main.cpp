@@ -1,10 +1,9 @@
-//
-//  main.cpp
-//  Kono
-//
-//  Created by Ryan Temple on 1/23/18.
-//  Copyright © 2018 Ryan Temple. All rights reserved.
-//
+/************************************************************
+* Name:  Ryan Temple                                       *
+* Project:  CPP - Kono Project                             *
+* Class:  OPL CMPS 366 Spring '18                          *
+* Date:  Feb 27, 2018                                      *
+************************************************************/
 
 #include <iostream>
 #include "Tournament.hpp"

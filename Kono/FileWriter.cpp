@@ -12,6 +12,22 @@ FileWriter:: FileWriter() {
     
 }
 
+/* *********************************************************************
+ Function Name: saveGame:round:playerScore:playerColor:computerScore:computerColor:b:nextPlayer
+ Purpose: Helper function for writing game state to file
+ Parameters:
+ round, the current round
+ playerScore, the score of player
+ playerColor, the color of the player
+ computerScore, the scoreo of computer
+ computerColor, the color of computer
+ b, the board object
+ nextplayer, name of next player
+ Return Value:none
+ Local Variables:none
+ Algorithm:none
+ Assistance Received: none
+ ********************************************************************* */
 void FileWriter::saveGame(int round, int playerScore, string playerColor, int computerScore, string computerColor, Board *b, string nextPlayer) {
     
     cin.ignore(numeric_limits<streamsize>::max(), '\n');

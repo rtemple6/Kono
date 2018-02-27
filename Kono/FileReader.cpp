@@ -20,6 +20,20 @@ void FileReader::closeFile() {
     stream.close();
 }
 
+
+/* *********************************************************************
+ Function Name: createBoard:size:data
+ Purpose: Creates the board 2 dimesnional array
+ Parameters:
+ size, the size of the array
+ data, a 1D array of all the data inside the file
+ Return Value: the Board
+ Local Variables:
+ temp[], an integer array used to sort the grades
+ Algorithm:
+ 1)Loop through the array and for every size pieces load into a 2d array
+ Assistance Received: none
+ ********************************************************************* */
 string ** FileReader:: createBoard(int size, string data[]) {
     //Init board
     string ** board = new string *[size];
@@ -39,6 +53,18 @@ string ** FileReader:: createBoard(int size, string data[]) {
     return board;
 }
 
+/* *********************************************************************
+ Function Name: validateFile
+ Purpose: Input validation for choosing what file to read from
+ Parameters:
+ none
+ Return Value: The name of file
+ Local Variables:
+ validateFile, a bool value used for input validaiton
+ filename, the filename
+ Algorithm:none
+ Assistance Received: none
+ ********************************************************************* */
 string FileReader::validateFile() {
     bool validString = false;
     string filename;
@@ -62,6 +88,17 @@ void FileReader::setFileName(string name) {
     filename = name;
 }
 
+/* *********************************************************************
+ Function Name: loadDice
+ Purpose: Reads dice from file, determines winner and sets winner as return value
+ Parameters:none
+ Return Value: Human if the user is first, else Computer
+ Local Variables:none
+ Algorithm:
+ 1) Get rolls and validate, if tie get next
+ 2) If no more rolls then assign random numbers
+ Assistance Received: none
+ ********************************************************************* */
 string FileReader::loadDice() {
     
     string returnWinner = "Human";
@@ -110,6 +147,15 @@ string FileReader::loadDice() {
     return returnWinner;
 }
 
+/* *********************************************************************
+ Function Name: getRound
+ Purpose: Helper function for getting round from file
+ Parameters: none
+ Return Value: The round number
+ Local Variables:none
+ Algorithm:none
+ Assistance Received: none
+ ********************************************************************* */
 int FileReader::getRound() {
     openFile();
     
@@ -132,6 +178,15 @@ int FileReader::getRound() {
     return atoi(round.c_str());
 }
 
+/* *********************************************************************
+ Function Name: getNextPlayer
+ Purpose: Helper function for getting next PLayer from file
+ Parameters: none
+ Return Value: the next player name
+ Local Variables:none
+ Algorithm:none
+ Assistance Received: none
+ ********************************************************************* */
 string FileReader::getNextPlayer() {
     openFile();
     
@@ -145,6 +200,15 @@ string FileReader::getNextPlayer() {
     return nextPlayer;
 }
 
+/* *********************************************************************
+ Function Name: getComputerScore
+ Purpose: Helper function for getting computer score from file
+ Parameters: none
+ Return Value: Computer score
+ Local Variables:none
+ Algorithm:none
+ Assistance Received: none
+ ********************************************************************* */
 int FileReader::getComputerScore() {
     openFile();
     
@@ -163,6 +227,15 @@ int FileReader::getComputerScore() {
     return atoi(computer.c_str());;
 }
 
+/* *********************************************************************
+ Function Name: getComputerColor
+ Purpose: Helper function for getting the computer color from file
+ Parameters: none
+ Return Value: the computer color trimmed so "B" or "W"
+ Local Variables:none
+ Algorithm:none
+ Assistance Received: none
+ ********************************************************************* */
 string FileReader::getComputerColor() {
     openFile();
     
@@ -181,6 +254,16 @@ string FileReader::getComputerColor() {
     return computer.substr(0, 1);
 }
 
+
+/* *********************************************************************
+ Function Name: getPlayerScore
+ Purpose: Helper function for getting playerScore from file
+ Parameters: none
+ Return Value: The player score
+ Local Variables:none
+ Algorithm:none
+ Assistance Received: none
+ ********************************************************************* */
 int FileReader::getPlayerScore() {
     openFile();
     
@@ -199,6 +282,15 @@ int FileReader::getPlayerScore() {
     return atoi(player.c_str());;
 }
 
+/* *********************************************************************
+ Function Name: getPlayerColor
+ Purpose: Helper function for getting playercolor from file
+ Parameters: none
+ Return Value: the player color trimmed so "B" or "W"
+ Local Variables:none
+ Algorithm:none
+ Assistance Received: none
+ ********************************************************************* */
 string FileReader::getPlayerColor() {
     openFile();
     
@@ -217,6 +309,18 @@ string FileReader::getPlayerColor() {
     return player.substr(0, 1);
 }
 
+/* *********************************************************************
+  Function Name: getBoard
+  Purpose: Helper function for getting the baordd from file
+  Parameters: none
+  Return Value:
+tuple
+ int the boardSize
+ string** the 2d baord data
+  Local Variables:none
+  Algorithm:none
+  Assistance Received: none
+  ********************************************************************* */
 tuple<int, string**> FileReader:: getBoard() {
     
     openFile();
