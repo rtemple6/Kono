@@ -19,6 +19,15 @@ void BoardView::setBoard(Board *b) {
     this->board = b;
 }
 
+/* *********************************************************************
+ Function Name: draw
+ Purpose: To draw the board using Board data
+ Parameters:none
+ Return Value:none
+ Local Variables:none
+ Algorithm:none
+ Assistance Received: none
+ ********************************************************************* */
 void BoardView::draw() {
     //This loops on the rows.
     int size = this->board->getBoardSize();
