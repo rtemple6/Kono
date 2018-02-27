@@ -8,10 +8,34 @@
 
 #include "Computer.hpp"
 
+/* *********************************************************************
+ Function Name: Computer:color : Player(color)
+ Purpose: Creates a human setting the protected player color to the color
+ Parameters:color, the color to set
+ Return Value: new Human
+ Local Variables:none
+ Algorithm:none
+ Assistance Received: none
+ ********************************************************************* */
 Computer:: Computer(string color) : Player(color) {
     setColor(color);
 }
 
+/* *********************************************************************
+ Function Name: play
+ Purpose: Called when computer is going to move piece.  
+ Parameters:none
+ Return Value:
+ a tuple consisting of
+ int, the row
+ int, the column
+ Diection, the direction
+ MoveType, capture/block/advance
+ Local Variables:none
+ Algorithm:none
+ Assistance Received:
+ https://www.daniweb.com/programming/software-development/tutorials/71858/user-input-strings-and-numbers-c
+ ********************************************************************* */
 tuple<int, int, Direction,MoveType> Computer::play() {
     //Does the computer have any super pieces?
     int row, column;

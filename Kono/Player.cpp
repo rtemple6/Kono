@@ -44,12 +44,33 @@ string Player::getColor() {
     return this->color;
 }
 
+/* *********************************************************************
+ Function Name: play
+ Purpose: This is called when the player is asking for advice or when the compute ris making a move
+ Parameters:none
+ Return Value:
+ a tuple consisting of
+ int, the row
+ int, the column
+ Diection, the direction
+ MoveType, capture/block/advance
+ Local Variables:none
+ Algorithm:
+ 1) check to see if there is any super pieces that can move
+ 2) if no super then check to see if we can block a piece
+ 3) if we cant block any piece just advance towards opponents home piece
+ Assistance Received:
+ https://www.daniweb.com/programming/software-development/tutorials/71858/user-input-strings-and-numbers-c
+ ********************************************************************* */
 tuple<int, int, Direction, MoveType> Player::play() {
     int r, c;
     Direction d;
     bool areSuperPieces, areBlockMoves;
     
+    //See if there is any super pieces
     tie(r, c, d, areSuperPieces) = areAnySuperPieceMoves();
+    
+    //See if there is any block moves
     tie(r, c, d, areBlockMoves) = areAnyBlockMoves();
     
     if (areSuperPieces) {
@@ -57,6 +78,7 @@ tuple<int, int, Direction, MoveType> Player::play() {
     } else if (areBlockMoves) {
         return make_tuple(r, c, d, block);
     } else {
+        //M
         if (getColor() == "B") {
             //get lowest row index piece and move it up.
             for(int i = 0; i < getBoard()->getBoardSize();i++) {
@@ -64,14 +86,10 @@ tuple<int, int, Direction, MoveType> Player::play() {
                     string piece = getBoard()->pieceAt(i, j);
                     if (piece.substr(0, 1) == "B") {
                         if(!isValidMove(i, j, NW, false)) {
-                            if(!isValidMove(i, j, NE, false)) {
-//                                cout << "No advance moves." << endl;
-                            } else {
-                                
+                            if(isValidMove(i, j, NE, false)) {
                                 return make_tuple(i, j, NE, MoveType::advance);
                             }
                         } else {
-//                            cout << "Computer moved piece (" << i + 1 << ", " << j + 1 << ") northwest to advance towards your home points." << endl << endl;
                             return make_tuple(i, j, NW, MoveType::advance);
                         }
                     }
@@ -86,26 +104,33 @@ tuple<int, int, Direction, MoveType> Player::play() {
                     if (piece.substr(0, 1) == "W") {
                         if(!isValidMove(i, j, SE, false)) {
                             if(!isValidMove(i, j, SW, false)) {
-//                                cout << "No advance moves." << endl;
-                            } else {
-//                                cout << "Computer moved piece (" << i + 1 << ", " << j + 1 << ") southwest to advance towards your home points." << endl << endl;
                                 return make_tuple(i, j, SW, MoveType::advance);
                             }
                         } else {
-//                            cout << "Computer moved piece (" << i + 1 << ", " << j + 1 << ") southeast to advance towards your home points." << endl << endl;
                             return make_tuple(i, j, SE, MoveType::advance);
                         }
                     }
                 }
             }
         }
-        
-        //random piece in direction towards opponents home.
-        
     }
     return make_tuple(1, 1, SE, MoveType::advance);
 }
 
+/* *********************************************************************
+ Function Name: isValidMove:row:column:d
+ Purpose: Check to see if valid move in
+ Parameters:
+ row, the row
+ column, the column
+ d, the direciton
+ Return Value:
+ yes if valid
+ false if not valid
+ Local Variables:none
+ Algorithm:none
+ Assistance Received: none
+ ********************************************************************* */
 bool Player::isValidMove(int row, int column, Direction d, bool capture) {
     
     string selectedPiece = getBoard()->pieceAt(row, column);
@@ -159,6 +184,20 @@ bool Player::isValidMove(int row, int column, Direction d, bool capture) {
     return false;
 }
 
+/* *********************************************************************
+ Function Name: areAnySuperPieceMoves
+ Purpose: Finds all the super pieces and checks to see if any surrending directions are opponents
+ Parameters:none
+ Return Value:
+ tuple consisting of
+ int the row
+ int the column
+ direction the direction
+ bool if there is any or not
+ Local Variables:none
+ Algorithm:none
+ Assistance Received: none
+ ********************************************************************* */
 tuple<int, int, Direction, bool> Player::areAnySuperPieceMoves() {
     //Find each super piece
     //Check NE/NW/SE/SW
@@ -188,10 +227,6 @@ tuple<int, int, Direction, bool> Player::areAnySuperPieceMoves() {
                         directionWord = "southwest";
                     }
                     if (isValidMove(i, j, direction, true)) {
-//                        cout << endl;
-//                        getBoard()->movePiece(i, j, direction);
-//                        getBoard()->drawBoard();
-//                        cout << "The computer moved piece at (" << i + 1 << ", " << j + 1 << ") " << directionWord << " to capture your piece." << endl << endl;
                         return make_tuple(i, j, direction, true);
                     }
                 }
@@ -202,6 +237,20 @@ tuple<int, int, Direction, bool> Player::areAnySuperPieceMoves() {
     return make_tuple(1, 1, SE, false);
 }
 
+/* *********************************************************************
+ Function Name: areAnyBlockMoves
+ Purpose: Finds all the user pieces and checks to see if any surrending surronding directions are opponents
+ Parameters:none
+ Return Value:
+ tuple consisting of
+ int the row
+ int the column
+ direction the direction
+ bool if there is any or not
+ Local Variables:none
+ Algorithm:none
+ Assistance Received: none
+ ********************************************************************* */
 tuple<int, int, Direction, bool> Player::areAnyBlockMoves() {
     //For each computer piece
     //Go each direction
@@ -254,6 +303,22 @@ tuple<int, int, Direction, bool> Player::areAnyBlockMoves() {
     return make_tuple(1, 1, SE, false);
 }
 
+/* *********************************************************************
+ Function Name: doesHumanOccupyNeighborSpots:row:column:d
+ Purpose: Finds all the super pieces and checks to see if any surrending directions are opponents
+ Parameters:none
+ Return Value:
+ tuple consisting of
+ int the row
+ int the column
+ direction the direction
+ bool if there is any or not
+ Local Variables:none
+ Algorithm:
+ for each direction surronding a piece
+ check to see if that piece is an enemy piece. if it is then you are good because your blocking it.
+ Assistance Received: none
+ ********************************************************************* */
 tuple<int, int, Direction, bool> Player::doesHumanOccupyNeighborSpots(int row, int column, Direction d) {
     string directionWord;
     int originalRow = row;
@@ -335,12 +400,7 @@ tuple<int, int, Direction, bool> Player::doesHumanOccupyNeighborSpots(int row, i
             
             (getColor() == "B") ? opponentPiece = "W" : opponentPiece = "B";
             if (piece == opponentPiece) {
-                //It will block this piece
-//                cout << endl;
-//                getBoard()->movePiece(originalRow, originalColumn, direction);
-//                getBoard()->drawBoard();
-//                cout << "The computer moved the piece at (" << originalRow + 1 << ", " << originalColumn + 1 << ") " << directionWord << "." << endl;
-//                cout << "It wanted to block your piece at (" << innerRow + 1 << ", " << innerColumn + 1 << ")." << endl << endl;
+                //Block this piece
                 return make_tuple(originalRow, originalColumn, direction, true);
             } else {
                 //There is no piece to block
